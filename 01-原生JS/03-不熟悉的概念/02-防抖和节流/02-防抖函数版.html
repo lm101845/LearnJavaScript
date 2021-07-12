@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            height: 300px;
+            background-color: orange;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1"></div>
+    <script>
+        let div1 = document.querySelector('#div1')
+        function move(e){
+            this.innerText = `${e.offsetX},${e.offsetY}`
+        }
+
+        function debounce(fn,wait){
+            let timer = null
+            return function(){
+                let args = arguments
+                clearTimeout(timer)
+                // 先去掉之前的定时器
+                timer = setTimeout(()=>{
+                    // 唉，我他娘的apply还是不熟啊！！
+                    fn.apply(this,args)
+                },wait)
+            }
+        }
+
+        let debounceMove = debounce(move,500)
+        div1.onmousemove = debounceMove
+    </script>
+</body>
+
+</html>

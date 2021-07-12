@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			// 1.instance方法
+			/**
+         * 一个经典的 ECMAScript 问题是判断一个对象是不是数组。在只有一个网页（因而只有一个全局作
+        *  用域）的情况下，使用 instanceof 操作符就足矣
+        * 
+        * 使用 instanceof 的问题是假定只有一个全局执行上下文。如果网页里有多个框架，则可能涉及两
+        个不同的全局执行上下文，因此就会有两个不同版本的 Array 构造函数。如果要把数组从一个框架传
+        给另一个框架，则这个数组的构造函数将有别于在第二个框架内本地创建的数组。
+        * 
+        */
+			if (value instanceof Array) {
+				// 操作数组
+			}
+
+		
+            /* 2.isArray方法
+        * 为解决这个问题，ECMAScript 提供了 Array.isArray() 方法。这个方法的目的就是确定一个值是
+        否为数组，而不用管它是在哪个全局执行上下文中创建的。
+        * 
+        */
+			if (Array.isArray(value)) {
+				// 操作数组
+			}
+		</script>
+	</body>
+</html>

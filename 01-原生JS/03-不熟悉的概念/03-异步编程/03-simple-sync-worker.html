@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Concepts -->
+    <!-- 阮一峰http://www.ruanyifeng.com/blog/2018/07/web-worker.html -->
+    <!-- https://mdn.github.io/learning-area/javascript/asynchronous/introducing/simple-sync-worker.html -->
+    <!-- 经过一段时间，JavaScript获得了一些工具来帮助解决这种问题。通过 Web workers 可以把一些任务交给一个名为worker的单独的线程，这样就可以同时运行多个JavaScript代码块。一般来说，用一个worker来运行一个耗时的任务，主线程就可以处理用户的交互（避免了阻塞） -->
+    <!-- 记住这些，请查看simple-sync-worker.html (see it running live) , 再次打开浏览器的JavaScript 控制台。这个例子重写了前例：在一个单独的worker线程中计算一千万次日期，你再点击按钮，现在浏览器可以在日期计算完成之前显示段落，阻塞消失了。 -->
+    <!-- 注：代码本地跑不起来，要到服务器上去跑 -->
+      <button>Click me</button>
+      <script>
+          const btn = document.querySelector('button');
+          const worker = new Worker('worker.js');
+
+          btn.addEventListener('click', () => {
+              worker.postMessage('Go!');
+
+              let pElem = document.createElement('p');
+              pElem.textContent = 'This is a newly-added paragraph.';
+              document.body.appendChild(pElem);
+          });
+
+          worker.onmessage = function (e) {
+              console.log(e.data);
+          }
+      </script>
+</body>
+</html>

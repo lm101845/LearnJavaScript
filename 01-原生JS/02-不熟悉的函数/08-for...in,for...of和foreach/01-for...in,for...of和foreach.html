@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 链接1：https://www.jianshu.com/p/47cc2efcf11a
+        // 链接2：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+        // 1.ES6添加了for of 方法
+        /*
+         * JavaScript 原有的for...in循环，只能获得对象的键名，
+         * 不能直接获取键值。ES6 提供for...of循环，允许遍历获得键值。
+        */
+        var arr = ['a', 'b', 'c', 'd'];
+        for(let a in arr){
+            console.log(a);
+            //0 1 2 3
+        }
+
+        for(let a of arr){
+            console.log(a);
+            // 这2个a在不同的作用域里面，互不影响
+            // a b c d
+        }
+
+        // for...of循环可以代替数组实例的forEach方法。
+        const arr2 = ['red', 'green', 'blue']
+        arr2.forEach(function(element,index){
+            // 第一个参数是值，第2个参数才是键！！！
+            console.log(element);
+            console.log(index);
+        })
+    </script>
+</body>
+</html>

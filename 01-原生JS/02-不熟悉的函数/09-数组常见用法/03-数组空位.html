@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			/**
+			 *使用数组字面量初始化数组时，可以使用一串逗号来创建空位（hole）。
+			 * ECMAScript 会将逗号之间相应索引位置的值当成空位，
+			 * ES6 规范重新定义了该如何处理这些空位。可以像下面这样创建一个空位数组：
+			 *
+			 */
+			const options1 = [, , , , ,] // 创建包含 5 个元素的数组
+			console.log(options1.length) // 5
+			console.log(options1) // [,,,,,]
+
+			/**
+			 * ES6 新增的方法和迭代器与早期
+			 *  ECMAScript 版本中存在的方法行为不同。
+			 * ES6 新增方法普遍将这些空位当成存在的元素，
+			 * 只不过值为 undefined ：
+			 */
+			const options = [1, , , , 5]
+
+			for (const option of options) {
+                // 这是for of 的用法
+				console.log(option === undefined)
+			}
+			// false
+			// true
+			// true
+			// true
+			// false
+
+			const a = Array.from([, , ,]) // 使用 ES6 的 Array.from()创建的包含 3 个空位的数组
+			for (const val of a) {
+				console.log(val === undefined)
+			}
+			// true
+			// true
+			// true
+
+			console.log(Array.of(...[, , ,])) // [undefined, undefined, undefined]
+            
+			for (const [index, value] of options.entries()) {
+				console.log(value)
+			}
+
+			// 1
+			// undefined
+			// undefined
+			// undefined
+			// 5
+		</script>
+	</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1,#div2{
+            height: 200px;
+            background-color: orange;
+            overflow: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1">
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+    </div>
+
+    <div id="div2">
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+    </div>
+
+    <script>
+        let div1 = document.querySelector('#div1')
+        div1.onscroll = function (e) {
+            // 没有函数节流的效果
+            console.log('我在疯狂输出，没有CD,技能随便放');
+        }
+    </script>
+
+
+    <script>
+        let div2 = document.querySelector('#div2')
+        let flag = true
+        div2.onscroll = function (e) {
+            // 有函数节流的效果
+            if (!flag) {
+                return false
+            }
+            flag = false
+            setTimeout(() => {
+                console.log('技能有CD，我在慢慢输出');
+                flag = true
+            }, 500)
+        }
+    </script>
+
+
+</body>
+
+</html>
