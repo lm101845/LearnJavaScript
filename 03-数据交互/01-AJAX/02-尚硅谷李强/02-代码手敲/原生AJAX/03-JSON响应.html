@@ -1,0 +1,72 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-13 18:02:01
+ * @LastEditTime: 2021-07-13 18:51:53
+ * @FilePath: \01-AJAX\02-尚硅谷李强\02-代码手敲\原生AJAX\03-JSON响应.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON响应</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #89b;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result"></div>
+    <script>
+        const result = document.getElementById('result');
+        //绑定键盘按下事件
+        window.onkeydown = function () {
+            // window.onmouseover = function () {
+            // console.log('test');
+            //发送请求
+            const xhr = new XMLHttpRequest();
+            
+            //设置响应体数据的类型(用于自动转换)
+            xhr.responseType = 'json'
+
+            //初始化
+            xhr.open('GET', 'http://127.0.0.1:8000/json-server');
+
+
+            //发送
+            xhr.send()
+
+            //事件绑定
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // console.log(xhr.response);
+                        // result.innerHTML = xhr.response;
+
+                        // 手动对数据进行转换——注意：服务器返回的结果是一个字符串
+                        // 即xhr.response它是一个字符串，我们想要 把它变成一个对象
+                        // JSON.parse：字符串=>对象
+
+                        // 手动对对数据进行转换的方式：
+                        // let data = JSON.parse(xhr.response)
+                        // console.log(data);
+                        // result.innerHTML = data.name
+
+                        // 自动对数据进行转换的方式：借助xhr对象的一个属性
+                        console.log(xhr.response);
+                        result.innerHTML = xhr.response.name
+                    }
+                }
+            }
+
+        }
+    </script>
+</body>
+
+</html>
