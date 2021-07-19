@@ -1,7 +1,7 @@
 /*
  * @Author: liming
  * @Date: 2021-05-24 13:31:19
- * @LastEditTime: 2021-07-13 18:44:56
+ * @LastEditTime: 2021-07-19 16:21:54
  * @FilePath: \01-AJAX\02-尚硅谷李强\02-代码手敲\server.js
  */
 // 1.先引入express
@@ -54,6 +54,32 @@ app.all('/json-server', (request, response) => {
     // response.send('hello-ajax-json')
     response.send(str)
 })
+
+//针对ID缓存的规则
+app.get("/ie", (request, response) => {
+  // 设置响应头之设置允许跨域
+  response.setHeader("Access-Control-Allow-Origin", "*");
+
+  //响应头
+  response.setHeader("Access-Control-Allow-Headers", "*");
+  // 设置响应体
+  response.send("hello-ajax-ie-3");
+});
+
+//延时响应
+app.get("/delay", (request, response) => {
+  // 设置响应头之设置允许跨域
+  response.setHeader("Access-Control-Allow-Origin", "*");
+
+  //响应头
+    // response.setHeader("Access-Control-Allow-Headers", "*");
+    //加个定时器，3秒后才把结果返回给客户端
+    setTimeout(() => {
+      // 设置响应体
+      response.send("3秒后才响应");
+    },3000)
+ 
+});
 
 // 4.最后一步：监听端口，启动服务
 app.listen(8000, () => {
