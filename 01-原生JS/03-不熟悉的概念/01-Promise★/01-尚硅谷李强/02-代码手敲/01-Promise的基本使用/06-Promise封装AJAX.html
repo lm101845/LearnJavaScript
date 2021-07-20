@@ -1,0 +1,48 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-20 20:18:00
+ * @LastEditTime: 2021-07-20 20:29:34
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\01-Promise的基本使用\06-Promise封装AJAX.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise封装AJAX操作</title>
+</head>
+<body>
+    <script>
+          /**
+         * 封装一个函数 sendAJAX 发送 GET AJAX 请求
+         * 参数   URL
+         * 返回结果 Promise 对象
+         */
+         function sendAJAX(url){
+             return new Promise((resolve, reject) => {
+                 const xhr = new XMLHttpRequest();
+                 xhr.open('GET', url)
+                 xhr.send()
+                 //处理结果
+                 xhr.onreadystatechange = function(){
+                     if(xhr.readyState === 4){
+                         //判断结果
+                         if(xhr.status >= 200 && xhr.status < 300){
+                             resolve(xhr.response)
+                         }else{
+                             reject(xhr.status)
+                         }
+                     }
+                 }
+             })
+         }
+
+         sendAJAX('http://152.136.185.210:7878/api/m5/recommend').then(value=>{
+            console.log(value);
+         },reason=>{
+            console.log(reason);
+         })
+    </script>
+</body>
+</html>
