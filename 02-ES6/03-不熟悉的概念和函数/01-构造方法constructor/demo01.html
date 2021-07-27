@@ -1,0 +1,59 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-26 17:09:24
+ * @LastEditTime: 2021-07-26 17:14:30
+ * @FilePath: \03-不熟悉的概念和函数\01-构造方法constructor\demo01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 链接：https://www.jianshu.com/p/8f6dd832e57a
+      //         constructor( )——构造方法
+      // 这是ES6对类的默认方法，通过 new 命令生成对象实例时自动调用该方法。并且，该方法是类中必须有的，如果没有显示定义，则会默认添加空的constructor( )方法。
+
+      // ES5中，JavaScript是没有继承的写法的，因此，通过使用 prototype 来达到目的。举个例子：
+      //构造函数People
+      function People(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      People.prototype.sayName = function () {
+        return "我的名字是：" + this.name;
+      };
+
+      //创建新的子类p1
+      let p1 = new People("harrisking", 23);
+      console.log(p1);
+      console.log(p1.sayName());
+
+      console.log('=============================');
+      //但是在ES6中，可以通过class 来实现。举个例子：
+      class Person {
+        //构造方法constructor就等于上面的构造函数People
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+
+        sayName() {
+          return "我的名字是：" + this.name;
+        }
+      }
+
+      //创建新的子类p2
+      let p2 = new Person("harrisking", 23);
+      console.log(p2);
+      console.log(p2.sayName());
+
+      //上面两个例子等价。其实class方法完全就是对象原型的语法糖，效果是完全一样的。
+    </script>
+  </body>
+</html>

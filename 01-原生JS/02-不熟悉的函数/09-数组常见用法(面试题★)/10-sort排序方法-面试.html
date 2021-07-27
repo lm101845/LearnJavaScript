@@ -1,0 +1,92 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-26 09:13:21
+ * @LastEditTime: 2021-07-26 09:58:42
+ * @FilePath: \02-不熟悉的函数\09-数组常见用法(面试题★)\10-sort排序方法-面试.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://blog.csdn.net/weixin_40632390/article/details/79021674
+      // 说起对数组的排序，大家能想到的应该是冒泡排序，快速排序，sort排序，以及希尔排序吧，但是可能对sort排序只停留再数组层面(每个元素均是数字或者字符串)，事实上，它还可以对对象进行排序。
+      // 原理是：不管元素是什么类型，sort排序始终是根据元素的unicode编码进行的
+
+      var arr1 = [10, 1, 5, 2, 3];
+      arr1.sort();
+      console.log(arr1);
+      //1 10 2 3 5
+      //很明显是根据unicode编码来排序的,这也显示了其不稳定性。
+
+      //语法：
+      //arr.sort()
+      //   arr.sort(compareFunction)
+      //  [参数]：
+      // compareFunction可选。用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的诸个字符的Unicode位点进行排序。
+
+      //   [返回值]：返回排序后的数组。原数组已经被排序后的数组代替。
+      // sort排序方法会改变原来的数组的！！！
+
+      // 如果没有指明 compareFunction ，那么元素会按照转换为的字符串的诸个字符的Unicode位点进行排序。例如 "Banana" 会被排列到 "cherry" 之前。数字比大小时，2 出现在 10 之前，但这里比较时数字会先被转换为字符串，所以 "10" 比 "2" 要靠前。
+
+      // 如果指明了 compareFunction ，那么数组会按照调用该函数的返回值排序。即 a 和 b 是两个将要被比较的元素：
+
+      // 如果 compareFunction(a, b) 小于 0 ，那么 a 会被排列到 b 之前；
+      // 如果 compareFunction(a, b) 等于 0 ， a 和 b 的相对位置不变。备注： ECMAScript 标准并不保证这一行为，而且也不是所有浏览器都会遵守（例如 Mozilla 在 2003 年之前的版本）；
+      // 如果 compareFunction(a, b) 大于 0 ， b 会被排列到 a 之前。
+      // compareFunction(a, b) 必须总是对相同的输入返回相同的比较结果，否则排序的结果将是不确定的。
+
+      //   那么我们就可以运用以上所说的compareFunction去完成对数字的排序:
+      var arr2 = [10, 1, 5, 2, 3];
+      function compare(a, b) {
+        if (a < b) {
+          return -1;
+        }
+        if (a > b) {
+          return 1;
+        }
+        // a must be equal to b
+        return 0;
+      }
+      arr2.sort(compare);
+      console.log(arr2);
+
+      //当然也可以简化为:
+      var arr3 = [10, 1, 5, 2, 3];
+      arr3.sort(function (a, b) {
+        return a - b;
+      });
+      //其结果是不变的
+      console.log(arr3);
+
+      //元素为对象时（可按其中某个属性来排序）：
+      var items = [
+        { name: "Edward", age: 21 },
+        { name: "Sharpe", age: 37 },
+        { name: "And", age: 45 },
+        { name: "The", age: -12 },
+        { name: "Magnetic", age: 0 },
+        { name: "Zeros", age: 37 },
+      ];
+
+      items.sort(function (a, b) {
+        if (a.age > b.age) {
+          return 1;
+        }
+        if (a.age < b.age) {
+          return -1;
+        }
+        // a 必须等于 b
+        return 0;
+      });
+
+      console.log(items);
+    </script>
+  </body>
+</html>

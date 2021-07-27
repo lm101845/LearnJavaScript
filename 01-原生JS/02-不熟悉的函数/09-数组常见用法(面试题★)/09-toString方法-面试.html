@@ -1,0 +1,56 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-25 17:43:14
+ * @LastEditTime: 2021-07-26 09:32:06
+ * @FilePath: \02-不熟悉的函数\09-数组常见用法(面试题★)\09-toString方法-面试.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 链接：https://juejin.cn/post/6844904167874494471
+      let a = 10;
+      console.log(a.toString()); // "10"
+      //   如果一个变量是数字类型，那么带有的toString就可以将其转换成字符串，我们经常使用，同时也觉得这样也很合理。
+      //   与 Boolean 类型一样， Number 类型重写了 valueOf() 、 toLocaleString() 和 toString() 方法。
+
+      console.log(Number.toString());
+      /*
+"function Number() { [native code] }"
+*/
+
+      let b = true;
+      console.log(b.toString()); // "true"
+      let c = "abc";
+      console.log(c.toString()); // "abc"
+      let d = [1, 2, 3, 4];
+      console.log(d.toString()); // "1,2,3,4"
+      let e = Symbol();
+      console.log(e.toString()); // "Symbol()"
+      let f = undefined;
+      //console.log(f.toString()); // 报错 “Cannot read property 'toString' of undefined”
+      let g = null;
+      //console.log(g.toString()); // 报错 “Cannot read property 'toString' of null”
+
+      //       从以上的表现来看，对于每一种类型都有自己的toString方法，其中undefined和null这两种类型没有对应的方法，同时这也是程序经常报错的地方。根据有toString方法的类型来看，我们发现这个方法就是将输入的类型转换成字符串的形式进行输出，对于每一种类型的字符串形式官方有规定，比如数组则是里面的元素按逗号的方式进行连接。
+      // 接下来我们来看引用类型object的toString方法，看看打印出来的结果是什么。
+
+
+//       现在我们可以得出一个结论，每一种类型的toString各有不同，并不是所有的都是使用原型链顶端的toString，也就是Object的toString，
+// 我们在编写类的时候，通常也会根据需求重写toString的方法。
+// 有些东西看似简单，其实含有一些很有价值的知识和理论，甚至是一些超过编程以外的收获，而这些往往是在一些很特别的经历过后才会感受到。
+// 这也是为什么每个年龄看同一本书看到的东西不同，收获也不同。所以不管多么简单，隔一段时间看看，会学到很多。
+// 反正记住，这个世界没有白辛苦，只要我们保持总结的习惯，让每一份经历都变成进步的阶梯。
+
+
+      let h = {};
+      console.log(h.toString()); // "[object Object]"
+    </script>
+  </body>
+</html>

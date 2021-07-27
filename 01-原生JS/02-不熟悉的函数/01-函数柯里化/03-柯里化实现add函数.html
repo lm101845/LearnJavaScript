@@ -1,0 +1,51 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-24 21:25:01
+ * @LastEditTime: 2021-07-24 21:53:08
+ * @FilePath: \01-函数柯里化\03-柯里化实现add函数.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 要求：
+        // add(1,2,3)=6
+        // add(1,2,3)(4) = 10
+        // add(1,2,3,4,5)=15
+        // 提示：传入参数的时候数量不能进行限定(因为有的1个参数，有的2个参数，还有的5个参数)
+        // 也不能丢失传入的参数，什么时候传入参数都可以
+
+        function add(){
+            //将传入的不定参数arguments转换为数组
+            var _args = Array.prototype.slice.call(arguments)
+            var _adder = function(){
+                _args.push(...arguments)
+                return _adder
+            }
+
+            //toString隐形转换特性
+            _adder.toString = function(){
+                return _args.reduce(function(prev,cur){
+                    return prev + cur
+                },0)
+            }
+
+            return _adder
+        }
+
+        let a = add(1,2,3)
+        let b = add(1)(2)(3)
+        let c = add(1,2,3)(4)
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        </script>
+</body>
+</html>
