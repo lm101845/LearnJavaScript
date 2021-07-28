@@ -32,7 +32,7 @@ app.all('/json-server', (request, response) => {
     response.setHeader('Access-Control-Allow-Headers', '*');
     //响应一个数据
     const data = {
-        name: 'atguigu'
+        name: '尚硅谷'
     };
     //对对象进行字符串转换
     let str = JSON.stringify(data);
@@ -93,7 +93,7 @@ app.all('/fetch-server', (request, response) => {
 app.all('/jsonp-server',(request, response) => {
     // response.send('console.log("hello jsonp")');
     const data = {
-        name: '尚硅谷atguigu'
+        name: '尚硅谷'
     };
     //将数据转化为字符串
     let str = JSON.stringify(data);

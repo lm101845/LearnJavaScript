@@ -1,7 +1,7 @@
 /*
  * @Author: liming
  * @Date: 2021-05-24 13:31:19
- * @LastEditTime: 2021-07-20 18:08:17
+ * @LastEditTime: 2021-07-28 18:34:06
  * @FilePath: \02-尚硅谷李强\02-代码手敲\server.js
  */
 // 1.先引入express
@@ -113,8 +113,8 @@ app.all("/gu", (request, response) => {
   //响应头
   // response.setHeader("Access-Control-Allow-Headers", "*");
   // 设置响应体
-//   const data = { name: "尚硅谷" };
-//   response.send(JSON.stringify(data));
+  //   const data = { name: "尚硅谷" };
+  //   response.send(JSON.stringify(data));
 });
 
 //fetch服务
@@ -130,6 +130,60 @@ app.all("/fetch-server", (request, response) => {
   response.send(JSON.stringify(data));
 });
 
+//jsonp服务
+app.all("/jsonp-server", (request, response) => {
+  // response.send('hello jsonp-server')
+  // response.send('console.log("hello jsonp-server")')
+  //这个请求发过去之后，要的是一个函数调用的name回来
+  const data = {
+    name: "尚硅谷111",
+  };
+  //将数据转换为字符串
+  let str = JSON.stringify(data);
+  //JSON.stringify:JS对象=>JSON字符串
+  //返回结果
+  response.end(`handle(${str})`);
+  //使用end不会加特殊响应头
+});
+
+//用户名检测是否存在
+app.all("/check-username", (request, response) => {
+  const data = {
+    exists: 1,
+    msg: "用户名已经存在",
+  };
+  //将数据转换为字符串
+  let str = JSON.stringify(data);
+  //返回结果
+  response.end(`handle(${str})`);
+});
+
+//使用jquery检测是否存在
+app.all("/jquery-jsonp-server", (request, response) => {
+  const data = {
+    name: "尚硅谷",
+    city: ["北京", "上海", "深圳"],
+  };
+  //将数据转换为字符串
+  let str = JSON.stringify(data);
+  //接收callback这个参数
+  let cb = request.query.callback;
+  //返回结果
+  response.end(`${cb}(${str})`);
+});
+
+// app.all("cors-server", (request, response) => {
+    // 少写一个斜杠，害的我找了半天！！
+app.all("/cors-server", (request, response) => {
+  //设置响应头
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Headers", "*")
+    response.setHeader("Access-Control-Allow-Method", "*")
+  // response.setHeader('Access-Control-Allow-Origin','http://localhost:5500')
+//   res.send("hello CORS");
+    // 前面是response，后来写成了res，又找了半天。。。
+  response.send("hello CORS");
+});
 
 // 4.最后一步：监听端口，启动服务
 app.listen(8000, () => {
