@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		/**
+		 * 通过关系运算符可以比较两个值之间的大小关系
+		 * 如果关系成立它会返回true,否则返回false
+		 *
+		 * 非数值的情况
+		 * 	-对于非数值进行比较时，会将其转换为数字,然后再比较
+		 */
+		console.log(1 >= true);   //true
+		console.log(1 > "0");	  //true
+		console.log(10 > null);	  //true 
+		console.log(10 > NaN);	  //false   任何值和NaN做任何比较都是false
+		console.log(10 > "hello");	  //false 
+		console.log(true > false);   //true
+
+		//比较两个字符串时，比较的是字符编码
+		console.log("a" < "b");   //true
+
+		//比较字符串编码是一位一位进行比较，如果两位一样，则比较下一位
+		console.log("abc" < "b");   //true
+
+		//比较中文没有意义
+		console.log("我" > "你");  //true
+
+		//如果比较两个字符串类型的数字，可能得到不可预期的效果
+		//注意，在比较两个字符串型的数字时，一定要转型
+		console.log("111111454444" < "5");  //true
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

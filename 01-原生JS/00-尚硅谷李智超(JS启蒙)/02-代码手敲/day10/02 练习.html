@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		/**
+		 * 定义一个函数，判断一个数字是否是偶数，如果是返回true,	否则返回false
+		 */
+		
+		/*function isou(a){
+			if(a % 2 == 0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		var result = isou(45);
+		console.log("result=" + result);
+*/
+		//简洁版
+		function isou(num){
+			return num % 2 == 0;
+		}
+
+		var result = isou(7);
+		console.log("result=" + result);
+
+		/**
+		 * 定义一个函数，可以根据半径计算一个圆的面积并计算结果
+		 */
+		var PI = 3.1415926;
+		function circle(r){
+			var s = PI*r*r;
+			return s;
+
+			//或者直接return PI*r*r;
+		}
+		var result = circle(8);
+		console.log("圆的面积是" + result);
+
+
+		/**
+		 * 创建一个函数，可以在控制台中输出一个人的信息
+		 * 		可以输出人的name,age,gender,address
+		 *
+		 * 实参可以是任意数据类型，也可以是一个对象(当参数过多可以将参数封装到一个对象里更方便)
+		 * 		-当我们的参数过多时，可以将参数封装到一个对象中，然后通过对象传递 
+		 */
+		
+		function sayHello(name,age,gender,address){
+			console.log(name + "今年" + age + "岁了，" + "性别" + gender + "，家住" + address);
+		};
+		
+		sayHello("孙悟空",500,"男","花果山");
+
+
+
+		//创建一个对象
+		var obj = {
+			name:"孙悟空",
+			age:"500",
+			gender:"男",
+			address:"花果山"
+		};
+
+		//简洁版
+		function sayHello(o){	//o就是obj
+			console.log(o.name + "今年" + o.age + "岁了，" + "性别" + o.gender + "，家住" + o.address);
+		};
+
+		//创建一个对象
+		var obj = {
+			name:"孙悟空",
+			age:"500",
+			gender:"男",
+			address:"花果山"
+		};
+
+		sayHello(obj);
+
+
+		/**
+		 * 实参可以使一个对象，也可以是一个函数
+		 * 对象能干的事情，函数都能干
+		 */
+		function fun(a){
+			console.log("a=" + a);
+			a(obj);
+		}
+
+		fun(sayHello);
+
+		//可以将一个匿名函数作为一个实参传递给一个函数
+		fun(function(){alert("hello")});
+
+
+		/**
+		 * -circle()	冰淇淋
+		 * 		调用函数
+		 * 		相当于使用函数的返回值
+		 * 		
+		 * 	circle	冰淇淋机器
+		 * 		函数对象
+		 * 		相当于直接使用函数对象
+		 */
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
+
+<!-- 看1 -->

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		/**
+		 * 使用字面量来创建正则表达式
+		 * 	 语法： var 变量 = /正则表达式/匹配模式
+		 *
+		 * 使用字面量的方式创建更加简单
+		 * 	使用构造函数创建更加灵活
+		 */
+		var reg = /a/i;
+		//var reg = new RegExp("a", "i");
+		console.log(reg.test("abc"));  //true
+		console.log(typeof reg);       //object
+
+		//创建一个正则表达式，检查一个字符串中是否有a或b
+		/**
+		 * 使用竖线|表示或者的意思
+		 * 
+		 */
+		reg = /a|b|c/;
+		console.log(reg.test("acd"));  //true
+
+		/**
+		 * 创建一个正则表达式检查一个字符串中是否有字母
+		 * []里的内容也是或的关系
+		 * [ab] == a | b
+		 * [a-z] 表示任意小写字母
+		 * [A-Z] 表示任意大写字母
+		 * [A-z] 表示任意字母
+		 * [0-9] 表示任意数字
+		 */
+		reg = /[a-z]/
+		console.log(reg.test("p"));  //true
+
+		//检查一个字符串中是否含有abc 或adc 或aec
+		//比较笨的写法
+		reg = /abc|adc|aec/;
+
+		//比较聪明的写法
+		reg = /a[bde]c/;
+		console.log(reg.test("aec"));  //true
+
+		/**
+		 * [^×] 除了×以外的东西
+		 * 
+		 */
+		reg = /[^ab]/;
+		console.log(reg.test("abc"));  //true  有除了ab以外的东西
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

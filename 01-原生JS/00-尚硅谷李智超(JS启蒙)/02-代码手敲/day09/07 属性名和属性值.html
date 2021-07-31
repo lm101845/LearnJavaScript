@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>		
+		var obj = new Object();
+		/**
+		 * 向对象中添加属性
+		 * 		属性名：
+		 * 			-对象的属性名不强制要求遵守标识符的规范
+		 * 				什么乱七八糟的名字都可以使用
+		 * 		  	-但是我们使用还是尽量按照标识符的规范去做
+		 */
+		obj.name = "孙悟空";
+		obj.var = "hello";  //obj可以用
+		/**
+		 * 如果要使用特殊的属性名，不能采用.的方式来操作
+		 * 		需要使用另一种方式：
+		 * 			语法：对象["属性名"] = 属性值;
+		 * 		读取时也需要采用这一种方式
+		 *
+		 * 使用[]这种形式去操作属性，更加的灵活
+		 * 		在[]中可以直接传递一个变量(比如n)，这样变量值是多少就会读取哪个属性
+		 * 		
+		 */
+		//obj.123 = 789;  //会报错
+		obj["123"] = 789; //不会报错
+		obj["nihao"] = "你好";
+
+		console.log(obj.var);
+		console.log(obj["123"]);
+
+		var n = "123";
+		console.log(obj["123"]);  	//789
+		console.log(obj[n]);   		//789
+
+		var n = "nihao";
+		console.log(obj[n]);   		//你好
+		
+		/**
+		 * 属性值
+		 * 	JS对象的属性值，可以使任意的数据类型
+		 * 		甚至也可以是一个对象(在容器里又装了一个容器)
+		 */
+		
+		obj.test = "hello";
+		obj.test = "true";
+		obj.test = "null";
+		obj.test = "undefined";
+		console.log(obj.test);
+
+		//创建一个对象
+		var obj2 = new Object();
+		obj2.name = "猪八戒";
+
+		//将obj2设置为obj1的属性
+		obj.test = obj2;        //对象计算机有一个属性时键盘，同时键盘也是一个对象
+		console.log(obj.test);  
+		console.log(obj.test.name);  
+
+		/**
+		 * in运算符
+		 * 		-通过该运算符可以检查一个对象中是否含有指定的属性 
+		 * 			如果有则返回true,否则返回false
+		 *
+		 * 		-语法：
+		 * 			"属性名" in 对象
+		 */
+		
+		//检查obj中是否有test2这一属性
+		console.log("test2" in obj);	//false
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
+
+<!-- 看1  -->

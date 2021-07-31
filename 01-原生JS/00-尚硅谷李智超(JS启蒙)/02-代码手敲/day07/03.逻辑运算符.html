@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			/*  
+			 *JS中为我们提供了3种逻辑运算符  
+			 * &&  与
+			 * 		 -&&可以对符号两侧的值进行与运算并返回结果
+			 * 		 -运算规则
+			 * 			-两个值中只要有一个值为false就返回false
+			 * 				只有两个值都为true时才返回true
+			 * 
+			 * 		-JS中的"与"属于短路的与,
+			 * 				如果第一个值为false,则不会看第二个值
+			 * 
+			 * ||  或
+			 * 		-||可以对符号两侧的值进行或运算并返回结果
+			 * 		-运算规则：
+			 * 			-两个值中只要有一个true,就返回true
+			 * 				如果两个值都为false,才返回false
+			 * 		-JS中的"或"属于短路的或	
+			 * 				如果第一个值为true,则不会看第二个值
+			 * 
+			 * ！  非
+			 * 		 -！可以对一个值进行非运算
+			 * 		 -所谓非运算就是值对一个布尔值进行取反操作
+			 * 				true变false    false 变 true
+			 * 		 -如果对一个值进行两次取反，它不会变化
+			 * 		 -如果对非布尔值进行运算，则会将其转换成布尔值，然后再对其进行取反
+			 * 			所以我们可以利用该特点，来将一个其他的数据类型转换为布尔值
+			 * 			可以为一个任意数据类型取两次反，来将其转换为布尔值
+			 * 			原理和Boolean()函数一样
+			 */
+			
+			var a = true;
+			//对a进行非运算
+			a = !a;
+			a = !!a; //两次取反还是原值
+			console.log("a=" + a);
+			
+			var b = 10;
+			b = !b;
+			
+			console.log("b=" + b);  //false
+			console.log(typeof b);
+			
+			//只要有一个false,就返回false
+			var result = true && false;   //true
+			var result = true && false;   //false
+			var result = false && false;   //false
+
+			console.log("result=" + result);
+			
+			//第一个值为true会检查第二个值
+			true&&alert("看我出不出来");  //可以出来
+			
+			//第一个值为false,不会检查第二个值
+			false&&alert("看我出不出来");  //出不来
+			
+			
+			
+			//两个都是false,则返回false
+			result = false || false;		//false
+			
+			result = true || false;			//true
+			
+			result = false || true;			//true
+			
+			result = true || true;      //true
+			console.log("result=" + result);
+			
+			
+			
+			//第一个值为false,则会检查第二个值
+			false || alert("123");   //123出来了
+			
+			//第一个值为true,则不再检查第二个值
+			true || alert("123");
+			
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

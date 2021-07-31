@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			/*  
+			*一元运算符，只需要一个操作数
+			* 	+  正号  正号不会对数字产生任何影响
+			* 		
+			* 	-  负号  负号可以对数字进行符号取反
+			* 
+			* 	对于非Number类型的值,
+			* 		它会将先转换为Number,然后再运算
+			* 		可以对一个其他的数据类型使用 + ，来将其转换为Number	（比-0 ，*1 ，/1 还简单）
+			* 		它的原理和Number()函数一样
+			* 
+			*/
+		   
+		   var a = 123;
+		   //a = +a;
+		   //a = -a;
+		   
+		   a = true;
+		   a = -a;
+		   
+		   a = "18";
+		   a = -a;
+		   a = +a;
+		   console.log("a=" + a);
+		   console.log(typeof a);
+		   
+		   
+		   var result = 1 + "2" + 3   //123
+		   var result = 1 + +"2" + 3  //6  在字符串2前面加一个正号会将字符串2转换为数字2
+
+		   console.log("result=" + result);
+		   
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+
+<!-- 看1 -->

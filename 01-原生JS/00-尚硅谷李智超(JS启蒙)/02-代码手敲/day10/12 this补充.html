@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+
+		//创建一个name变量
+		var name = "全局";
+
+		//创建一个sayName()函数
+		function fun(){
+			console.log(this.name);		//如果没有this,则只能输出全局
+		}
+
+		//创建2个对象
+		var obj = {
+			name:"孙悟空",
+			sayName:fun
+		};
+
+		var obj2 = {
+			name:"猪八戒",
+			sayName:fun
+		};
+
+		//我们希望调用obj.sayName()时可以输出obj的名字
+		obj.sayName();
+		obj2.sayName();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

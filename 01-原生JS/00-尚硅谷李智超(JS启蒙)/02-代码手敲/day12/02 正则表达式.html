@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		/**
+		 * 创建一个正则表达式检查一个字符串中是否含有aaaaaa
+		 */
+		
+		/**
+		 * 量词
+		 * 	-通过量词可以设置一个内容出现的次数
+		 * 	-量词只对它前边的一个内容起作用
+		 * 	-{n} 正好出现n次
+		 */
+		
+		//笨方法
+		var reg = /aaaaaa/;
+		console.log(reg.test("abc"));  //false
+		console.log(reg.test("aaaaaabc"));  //true
+
+		reg = /a{3}/;
+		console.log(reg.test("aaabd"));  //true
+
+		reg = /(ab){3}/;
+		console.log(reg.test("abababdkldk"));  //true
+
+		reg = /ab{3}c/;
+		console.log(reg.test("abbbcde"));	//true
+
+		reg = /b{3}/;
+		console.log(reg.test("bbbb"));	//true  找是否有连续出现的三个b
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

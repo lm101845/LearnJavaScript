@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		/**
+		 * break关键字可以用来退出switch或循环语句（不能用于if）
+		 * 不能在if语句中使用break和continue
+		 */
+		
+		for(var i = 0;i < 5; i++){
+			document.write(i);
+			if(i == 2){
+				//这个break是对for起作用的，不是对if起作用的，所以可以使用
+				//单独用不行，但是能在for循环里面用
+				//break会立即终止离他最近的循环语句
+				break;   
+			}			
+		}
+
+		/**
+		 * 可以为循环语句创建一个label,来标识当前的循环
+		 * label:循环语句
+		 * 使用break语句时，可以在break后跟着一个label,
+		 * 	这样break将会结束指定的循环，而不是最近的
+		 * 
+		 */
+		
+		outer:
+		for(var j = 0;j < 5; j++){
+			console.log("外层循环" + j);
+			for(var k = 0;k < 5; k++){
+				//终止内层循环，不终止外层循环
+				//如果加上outer标签则直接终止外层循环				
+					break outer; 				
+				console.log("内层循环" + k);
+			}
+		}
+
+		//break不能用于if语句，会报错 Uncaught SyntaxError: Illegal break statement
+		/*if(true){
+			break;
+			document.write("hello");
+		}*/
+
+
+		/**
+		 * continue关键字可以用来跳过当次循环
+		 * 同样continue也是默认只会对它最近的循环起作用
+		 * 
+		 */
+		for(var i = 0;i < 5; i++){
+			//console.log(i);
+			if(i == 2){
+				//当i等于2时跳过此次循环
+				continue;
+			}
+			console.log(i);
+		}
+
+		for(var j = 0;j < 5; j++){
+			console.log("外层循环" + j);
+			for(var k = 0;k < 5; k++){
+				if(k ==1){
+					continue; 
+				}				
+				console.log("内层循环" + k);
+			}
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
