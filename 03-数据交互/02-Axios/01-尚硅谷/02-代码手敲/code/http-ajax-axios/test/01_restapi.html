@@ -1,0 +1,64 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-31 15:08:03
+ * @LastEditTime: 2021-07-31 15:40:44
+ * @FilePath: \01-尚硅谷\02-代码手敲\code\http-ajax-axios\test\01_restapi.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <button onclick="testGet()">GET请求</button>
+    <button onclick="testPost()">POST请求</button>
+    <button onclick="testPut()">PUT请求</button>
+    <button onclick="testDelete()">DELETE请求</button>
+  </div>
+
+  <script src="https://cdn.bootcss.com/axios/0.19.0/axios.js"></script>
+  <script>
+    /* 1. GET请求: 从服务器端获取数据*/
+    function testGet() {
+        // axios.get('http://127.0.0.1:3000/posts')
+        // axios.get('http://127.0.0.1:3000/posts/1')
+        axios.get('http://127.0.0.1:3000/posts/?id=1')
+        .then(response => {
+            console.log('/posts get请求',response.data);
+        })
+        // 我们通过.then的方法来获取数据
+    }
+
+    /* 2. POST请求: 向服务器端添加新数据*/
+    // post请求要传请求体参数
+    function testPost() {
+        axios.post('http://localhost:3000/posts',{ "title": "json-server3", "author": "typicode3"})
+        //传一个对象作为第二个参数当作POST请求体参数
+        .then(response=>{
+            console.log('/posts post请求',response.data);
+        })
+    }
+
+    /* 3. PUT请求: 【更新】服务器端已经数据 */
+    function testPut() {
+        axios.put('http://localhost:3000/posts/5',{ "title": "json-server5","author": "typicode5"})
+        .then(response=>{
+            console.log('/posts put更新请求',response.data);
+        })
+    }
+
+    /* 4. DELETE请求: 删除服务器端数据 */
+    function testDelete() {
+      axios.delete('http://localhost:3000/posts/8')
+      .then(response => {
+          console.log('/posts delete删除请求',response.data);
+      })
+    }
+
+  </script>
+</body>
+</html>

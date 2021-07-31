@@ -1,0 +1,77 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-31 14:01:10
+ * @LastEditTime: 2021-07-31 14:40:41
+ * @FilePath: \第11章-期约与异步函数\11.2-期约\11.2.2-期约基础\02-通过执行函数控制期约状态.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve,reject) => {
+            resolve()
+        })
+
+        setTimeout(() =>{
+            console.log(p1);
+        })
+
+        console.log('===============');
+        
+        let p2 = new Promise((resolve,reject) => {
+            reject()
+        })
+
+        setTimeout(() =>{
+            console.log(p2);
+        })
+
+        /*在前面的例子中，并没有什么异步操作，因为在初始化期约时，执行器函数已经改变了每个期约的
+状态。*/
+
+        new Promise(() => {
+            setTimeout(() =>{
+                console.log('executor');
+            })
+        })
+
+        setTimeout(() =>{
+            console.log('promise initialized');
+        })
+
+        //添加 setTimeout 可以推迟切换状态：
+        let p3 = new Promise((resolve,reject) => {
+            setTimeout(() => {
+                resolve()
+            },1000)
+        })
+
+        setTimeout(() =>{
+            console.log(p3);
+        })
+
+        /*为避免期约卡在待定状态，可以添加一个定时退出功能。比如，可以通过 setTimeout 设置一个
+10 秒钟后无论如何都会拒绝期约的回调：*/
+        let p4 = new Promise((resolve,reject) => {
+            setTimeout(() =>{
+                reject();
+            },3000)
+        })
+
+        setTimeout(() =>{
+            console.log(p4,'p4');
+        })
+
+         setTimeout(() =>{
+            console.log(p4,'p4');
+        },5000)
+        
+    </script>
+</body>
+</html>

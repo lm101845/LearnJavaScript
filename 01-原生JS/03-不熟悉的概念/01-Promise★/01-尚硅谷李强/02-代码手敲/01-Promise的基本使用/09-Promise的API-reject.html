@@ -1,0 +1,30 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-31 13:13:01
+ * @LastEditTime: 2021-07-31 13:16:22
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\01-Promise的基本使用\09-Promise的API-reject.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let p = Promise.reject(521)
+        // let p2 = Promise.reject('i love you')
+        //reject是构造函数的API，实例对象里面没有这个API
+        // console.log(p);
+        // console.log(p2);
+
+        //你即使传入一个成功的promise对象，它的结果仍然是失败
+        let p3 = Promise.reject(new Promise((resolve, reject)=>{
+            resolve('OK')
+        }))
+        console.log(p3);
+    </script>
+</body>
+</html>
