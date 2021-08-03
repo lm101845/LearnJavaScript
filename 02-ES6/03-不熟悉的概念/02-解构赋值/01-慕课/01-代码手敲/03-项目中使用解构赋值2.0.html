@@ -1,0 +1,33 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-03 22:19:28
+ * @LastEditTime: 2021-08-03 22:45:51
+ * @FilePath: \01-代码手敲\03-项目中使用解构赋值2.0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+       //交换2个变量的值
+       let a = 1;
+       let b = 2;
+       [b,a] = [a,b];
+       console.log(a,b);
+
+       //json格式——本质上还是字符串，是对象形式的字符串
+       const json = '{"name":"es","price":"500"}'
+       //json=>js对象
+    //    const obj = JSON.parse(json)
+        // console.log(obj);
+
+        const {name,price} = JSON.parse(json)
+        console.log(name,price);
+    </script>
+  </body>
+</html>

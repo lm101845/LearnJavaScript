@@ -1,0 +1,52 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-03 21:57:23
+ * @LastEditTime: 2021-08-03 22:18:15
+ * @FilePath: \01-代码手敲\01-对象的解构赋值3.0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //解构赋值(取对象或者数组里的值)
+        //对象的解构赋值
+        const course = {
+            name:'es6',
+            price:500,
+            teacher:{
+                name:'xiecheng',
+                age:34
+            }
+        }
+
+        //之前写法：过于繁琐
+        // const name = course.name
+        // const price = course.price
+
+        //解构赋值写法
+        //解构赋值的特点是等号左边和等号右边的结构要【完全一样】才行——其实也不用完全一样，比如我左边只写个name也行
+        // 1.course是对象，所以左边也要是一个对象,所以要写大括号
+        //2.course有2个属性name和price，所以左边也要有2个属性name和price
+        // const {name,price,teacher} = course
+        const {
+            name:coursename,
+            price,
+            teacher:{
+                name,age
+            }
+        } = course
+        // console.log(name1,price,teacher,name,age);
+        // Uncaught ReferenceError: teacher is not defined
+        console.log(coursename,price,name,age);
+        //报错：Identifier 'name' has already been declared
+        //原因：const常量定义的关键字是不能够重复的，所以会报错 
+        //解决方法：可以起别名
+    </script>
+</body>
+</html>
