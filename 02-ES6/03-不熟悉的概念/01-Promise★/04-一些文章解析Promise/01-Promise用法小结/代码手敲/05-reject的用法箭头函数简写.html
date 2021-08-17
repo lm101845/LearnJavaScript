@@ -1,0 +1,55 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-12 00:51:09
+ * @LastEditTime: 2021-08-12 01:03:51
+ * @FilePath: \01-Promise★\04-一些文章解析Promise\01-Promise用法小结\代码手敲\05-reject的用法箭头函数简写.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        // 函数定义
+        function promiseClick(){
+          let p = new Promise((resolve, reject) => {
+              setTimeout(()=>{
+                let num = Math.ceil(Math.random()*20)
+                console.log('随机数生成的值：' + num);
+                if(num <= 10){
+                    resolve(num);
+                }else{
+                    reject('数字大于10，不予采纳，执行失败回调')
+                }
+              },1000)
+          })
+          //不写return会报错
+          //Uncaught TypeError: Cannot read property 'then' of undefined
+          return p 
+        //   这句话必须要写！！！！！！！！
+        }
+
+    //   函数调用
+    // p.then(  //p is not defined
+    promiseClick().then(
+        // then方法可以接受两个参数，第一个对应resolve的回调，第二个对应reject的回调。
+        // （也就是说then方法中接受两个回调，一个成功的回调函数，一个失败的回调函数，并且能在回调函数中拿到成功的数据和失败的原因），
+        // 所以我们能够分别拿到成功和失败传过来的数据就有以上的运行结果
+        data=>{
+            console.log('resolved成功回调');
+			console.log('成功回调接受的值：',data);
+
+        }, 
+        reason=>{
+            console.log('rejected失败回调');
+			console.log('失败执行回调抛出失败原因：',reason);
+        }
+    )
+    
+    </script>
+  </body>
+</html>

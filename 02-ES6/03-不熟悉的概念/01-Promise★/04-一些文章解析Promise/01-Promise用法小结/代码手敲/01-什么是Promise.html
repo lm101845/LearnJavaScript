@@ -1,0 +1,30 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-31 12:35:53
+ * @LastEditTime: 2021-08-12 00:32:58
+ * @FilePath: \01-Promise★\04-一些文章解析Promise\01-Promise用法小结\代码手敲\01-什么是Promise.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve, reject)=>{
+            //做一些异步操作
+            setTimeout(() => {
+                console.log('执行完成Promise');
+                resolve('要返回的数据可以任何数据例如接口返回数据')
+                // 其执行过程是：执行了一个异步操作，也就是setTimeout，2秒后，输出“执行完成”，【并且】调用resolve方法。
+                // 注意！我只是new了一个对象，并没有调用它，我们【传进去的函数】就已经执行了，这是需要注意的一个细节。
+            },2000)
+        })
+
+        // console.log(p);
+    </script>
+</body>
+</html>

@@ -14,3 +14,15 @@
 * [uuid——全球唯一，算法是根据你的地址，你的显卡等生成的，不过这个库很大](https://www.bootcdn.cn/uuid/)
 * [nanoid-uuid的变种，这个库比较小，用这个-A tiny (108 bytes), secure URL-friendly unique string ID generator](uuid的变种，这个库比较小，用这个)
 
+## 消息订阅与发布库
+
+* [pubsub-js](https://www.bootcdn.cn/pubsub-js/)
+
+## JS工具库
+
+* [lodash.js——是一个具有一致接口、模块化、高性能等特性的 JavaScript 工具库。](https://www.bootcdn.cn/lodash.js/)
+
+## 网络请求
+
+* [Axios——是一个基于 promise 的 HTTP 库,可以用在浏览器和 Node.js 中。](https://www.bootcdn.cn/axios/)
+

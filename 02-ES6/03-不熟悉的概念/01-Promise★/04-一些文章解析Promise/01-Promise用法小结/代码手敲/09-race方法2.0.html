@@ -1,0 +1,45 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-12 01:21:24
+ * @LastEditTime: 2021-08-12 01:22:03
+ * @FilePath: \01-Promise★\04-一些文章解析Promise\01-Promise用法小结\代码手敲\09-race方法2.0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //请求某个table数据
+      function requestTableList() {
+        var p = new Promise((resolve, reject) => {
+          //去后台请求数据，这里可以是ajax,可以是axios,可以是fetch
+          resolve('请求数据');
+        });
+        return p;
+      }
+      //延时函数，用于给请求计时 10s
+      function timeout() {
+        var p = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject("请求超时");
+          }, 10000);
+        });
+        return p;
+      }
+      Promise.race([requestTableList(), timeout()])
+        .then((data) => {
+          //进行成功回调处理
+          console.log(data);
+        })
+        .catch((err) => {
+          // 失败回调处理
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

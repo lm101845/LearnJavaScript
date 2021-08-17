@@ -1,0 +1,30 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-17 13:23:52
+ * @LastEditTime: 2021-08-17 13:27:42
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\01-Promise的基本使用\10-Promise的API-all.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       let p1 = new Promise((resolve, reject) => {
+           resolve('OK');
+        //  把p1设定为一个成功的状态
+       })
+
+        // let p2 = Promise.resolve('Success')
+        let p2 = Promise.reject('Error')
+        let p3 = Promise.resolve('Oh Yeah')
+       //
+       const result = Promise.all([p1,p2, p3])
+       console.log(result);
+   </script>
+</body>
+</html>
