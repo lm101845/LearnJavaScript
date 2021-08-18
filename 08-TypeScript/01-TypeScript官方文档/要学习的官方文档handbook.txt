@@ -1,0 +1,3 @@
+https://www.typescriptlang.org/docs/handbook/intro.html
+
+培养自己看英文文档的习惯。
