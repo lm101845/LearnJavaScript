@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-31 15:08:03
- * @LastEditTime: 2021-08-17 21:12:11
- * @FilePath: \01-尚硅谷\02-代码手敲\code\http-ajax-axios\02_xhr.html
+ * @LastEditTime: 2021-08-24 20:32:37
+ * @FilePath: \01-尚硅谷\02-代码手敲\http-ajax-axios\02_xhr.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -30,13 +30,21 @@
         axios({
           // 里面是一个配置对象
           url: "http://localhost:3000/posts",
+        //   url: "http://localhost:3000/posts2",
           method: "GET",
           // 默认是GET请求，本来可以不用写，这里为了让大家看的更清楚，还是写了
           params: {
-            id:1,
-            name:"zs",
+            id: 1,
+            name: "zs",
           },
-        });
+        }).then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            alert(error.message);
+          }
+        );
       }
 
       /* 2. POST请求: 服务器端保存数据*/
@@ -49,7 +57,14 @@
             title: "json-server---",
             author: "typicode9---",
           },
-        });
+        }).then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            alert(error.message);
+          }
+        );
       }
 
       /* 3. PUT请求: 服务器端更新数据*/
@@ -87,10 +102,12 @@
            * 不过有一些外面的库可以帮我们做
            * 我们也可以原生的写一下——下面考察的完全是基本功，如果感觉到吃力说明基本功不行，需要继续巩固
            */
+
+          //处理GET请求的url参数params
           let queryString = "";
-          Object.keys(params).forEach(key => {
+          Object.keys(params).forEach((key) => {
             //Object.keys(params)这样得到的是一个属性名组成的数组
-            queryString+=`${key}=${params[key]}$`;
+            queryString += `${key}=${params[key]}$`;
             // 注意：等号两边不要写空格！！！
           });
 
@@ -104,11 +121,11 @@
             // subString2个参数，都指的是索引！！！
 
             // 再将queryString接到url上面去
-            url+='?'+queryString
+            url += "?" + queryString;
             // 其实这样写也不是特别严格，因为url可能本身就有参数了
           }
 
-
+          //封装AJAX请求
           //这个函数我们称为执行器函数，用来执行异步任务
           //1.执行异步ajax请求(通过xhr对象来执行)
           //1.1创建xhr对象
@@ -129,6 +146,7 @@
           // 所以我们需要进行判断
           if (method === "GET") {
             request.send(null);
+            // send是异步的！！！
             // 说明我不传数据
             // 不写里面的参数null也是可以的——参数在url里面传，不在请求体里面传
             //  res.send()
@@ -142,16 +160,45 @@
             // 这个请求头的作用：告诉服务器请求体的格式是JSON
             // 【注意】有的后台只支持urlencoded格式的参数，不支持json格式的参数
             request.send(JSON.stringify(data)); //意味着我发送的是JSON格式的请求体参数
+            // JSON.stringify ===> 对象---->JSON字符串
           }
-          //2.1如果请求成功了，调用resolve()
+          // 绑定状态改变的监听(发请求需要时间，而这段代码是立即执行的)
+          // 但是这段代码是不可能在请求完成后才执行的，因为send方法是异步的
+          // 这段代码放在前面稍微合理一点(即先监听，然后再发请求)
+          //  但是放到后面也是可以的(我把请求发出去后马上监听，这也没什么问题，即监听操作稍微晚了那么一丁点)
+          request.onreadystatechange = () => {
+            // 如果请求没有完成，则不需要做处理，直接结束
+            if (request.readyState !== 4) {
+              return;
+            }
 
-          //2.2如果请求失败了，调用reject()
+            //根据响应状态码查看请求状态
+            //   如果响应状态码在[200,300)之间代表成功，否则失败
+            const { status, statusText } = request;
+            //2.1如果请求成功了，调用resolve()
+            if (status >= 200 && status < 300) {
+              //不能这么写：if(status >=200 && <300)！！第二个也要有status！！！
+              const response = {
+                // 注意：【request.response】里面的response是xhr对象封装的response
+                // 而【const response】是我们自己定义的response
+                // data:request.response
+                data: JSON.parse(request.response),
+                // JSON.parse--->把JSON转换为JS对象
+                // 这样可以完成一个目标：【 4.响应json数据自动解析为js的对象/数组】
+                status,
+                statusText,
+              };
+              //我要传的是response，那我提前就要准备一个response响应对象
+              resolve(response);
+            } else {
+              //2.2如果请求失败了，调用reject()
+              reject(new Error("request error status is " + status));
+
+              //一旦调用reject，那么Promise就失败了
+            }
+          };
         });
       }
-
-      axios({
-        // url: "/xxx",
-      });
     </script>
   </body>
 </html>

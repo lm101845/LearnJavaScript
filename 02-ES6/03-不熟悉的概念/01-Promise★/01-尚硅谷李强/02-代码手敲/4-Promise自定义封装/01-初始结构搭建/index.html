@@ -1,0 +1,32 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-24 17:53:35
+ * @LastEditTime: 2021-08-24 17:57:10
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\4-Promise自定义封装\01-初始结构搭建\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='./promise.js'></script>
+</head>
+<body>
+   <script>
+        let p = new Promise((resolve, reject)=>{
+            //我只要在promise.js里面声明了Promise函数，它是可以覆盖的，就不会使用原生的Promise了
+            // 就会使用自己定义的Promise函数了
+            resolve('Ok')
+        })
+
+        //使用then方法对成功和失败的结果做一个处理
+        p.then(value => {
+            console.log(value);
+        },reason=>{
+            console.warn(reason);
+        })
+   </script>
+</body>
+</html>
