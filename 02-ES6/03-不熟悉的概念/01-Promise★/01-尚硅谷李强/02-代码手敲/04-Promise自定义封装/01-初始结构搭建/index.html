@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-08-24 17:53:35
- * @LastEditTime: 2021-08-24 17:57:10
- * @FilePath: \01-尚硅谷李强\02-代码手敲\4-Promise自定义封装\01-初始结构搭建\index.html
+ * @LastEditTime: 2021-09-10 21:14:13
+ * @FilePath: \01-Promise★\01-尚硅谷李强\02-代码手敲\04-Promise自定义封装\01-初始结构搭建\index.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,13 @@
         let p = new Promise((resolve, reject)=>{
             //我只要在promise.js里面声明了Promise函数，它是可以覆盖的，就不会使用原生的Promise了
             // 就会使用自己定义的Promise函数了
-            resolve('Ok')
+            // 改变对象状态的【3种】方式
+            resolve('Ok')        //第一种方式:resolve
+            // reject('Error')      //第二种方式:reject
+            //  throw 'error'                      //第三种方式：抛出异常
+            //  还有try...catch才能处理throw抛出的异常
+            // 问题：try...catch我往哪里加？？
+            // 因为Promise在executor(resolve, reject);执行，所以try...catch也在这里家
         })
 
         //使用then方法对成功和失败的结果做一个处理
@@ -27,6 +33,8 @@
         },reason=>{
             console.warn(reason);
         })
+
+        console.log(p);
    </script>
 </body>
 </html>

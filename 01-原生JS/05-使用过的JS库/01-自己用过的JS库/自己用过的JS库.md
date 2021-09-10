@@ -21,6 +21,7 @@
 ## JS工具库
 
 * [lodash.js——是一个具有一致接口、模块化、高性能等特性的 JavaScript 工具库。](https://www.bootcdn.cn/lodash.js/)
+* [Underscore.js——一个 JavaScript 实用库，提供了一整套函数式编程的实用功能，但是没有扩展任何 JavaScript 内置对象。 ](http://github.com/jashkenas/underscore/)
 
 ## 网络请求
 
