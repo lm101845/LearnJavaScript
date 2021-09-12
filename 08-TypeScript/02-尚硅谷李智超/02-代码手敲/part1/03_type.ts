@@ -1,6 +1,14 @@
+/*
+ * @Author: liming
+ * @Date: 2021-03-15 21:09:30
+ * @LastEditTime: 2021-09-11 19:20:23
+ * @FilePath: \08-TypeScript\02-尚硅谷李智超\02-代码手敲\part1\03_type.ts
+ */
 // 也可以直接使用字面量进行类型声明
-let a: 10;
-a = 10;
+let a: 10;  //这种写法我是第一次见
+// a = 18;
+console.log(a);
+
 // a = 11;
 // a已经赋值10了，你就不能再修改它了
 // 赋值一次就不能再修改了，感觉就像常量一样
@@ -12,7 +20,7 @@ let b: "male" | "female";
 b = 'male'
 b = 'female'
 
-// 可以使用|来连接多个类型(联合类型)
+// 可以使用|来连接多个类型(【联合类型】)
 let c: boolean | string
 c = true;
 c= "hello"
@@ -154,3 +162,5 @@ function fn5() :never{
   // 这个函数一旦调用，它就会报错
   // 不过这种一般用的比较少
 }
+
+export { }
