@@ -30,4 +30,14 @@
 ## 可视化库
 
 * [Echarts——使用 JavaScript 实现的开源可视化库，可以流畅的运行在 PC 和移动设备上](https://www.bootcdn.cn/echarts/)
-* 
+
+## 移动端适配
+
+* [amfe-flexible](https://www.npmjs.com/package/amfe-flexible)
+* [postcss-pxtorem](https://www.npmjs.com/package/postcss-pxtorem)
+
+## 模拟本地
+
+* [json-server——用于搭建本地数据接口](https://www.npmjs.com/package/json-server)
+
+* [json-server 详解](https://www.cnblogs.com/fly_dragon/p/9150732.html)

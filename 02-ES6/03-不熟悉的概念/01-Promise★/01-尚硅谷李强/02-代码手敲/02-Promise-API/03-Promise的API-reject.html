@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-31 13:13:01
- * @LastEditTime: 2021-07-31 13:16:22
- * @FilePath: \01-尚硅谷李强\02-代码手敲\01-Promise的基本使用\09-Promise的API-reject.html
+ * @LastEditTime: 2021-10-03 07:17:16
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\02-Promise-API\03-Promise的API-reject.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -14,17 +14,17 @@
 </head>
 <body>
     <script>
-        // let p = Promise.reject(521)
-        // let p2 = Promise.reject('i love you')
-        //reject是构造函数的API，实例对象里面没有这个API
-        // console.log(p);
-        // console.log(p2);
+        let p = Promise.reject(521)
+        let p2 = Promise.reject('i love you')
+        //reject是构造函数Promise的API，实例对象里面没有这个API
+        console.log('p的值为',p);
+        console.log('p2的值为',p2);
 
         //你即使传入一个成功的promise对象，它的结果仍然是失败
         let p3 = Promise.reject(new Promise((resolve, reject)=>{
             resolve('OK')
         }))
-        console.log(p3);
+        console.log('p3的值为',p3);
     </script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-31 12:24:13
- * @LastEditTime: 2021-07-31 12:30:56
- * @FilePath: \01-尚硅谷李强\02-代码手敲\01-Promise的基本使用\07-Promise的API.html
+ * @LastEditTime: 2021-10-03 07:09:25
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\02-Promise-API\01-Promise的API.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +16,7 @@
     <script>
         let p = new Promise((resolve, reject) => {
             console.log(111);
-            //先打印111后打印222说明这个函数内部的代码是同步调用的
+            //先打印111后打印222说明【这个函数内部的代码】是【同步调用】的
 
             //修改一下promise对象的状态
             // resolve('ok');
@@ -31,6 +31,12 @@
         p.catch(reason => {
             console.log(reason);
         })
+        /**
+         *111
+         *Promise
+         *222
+         *error 
+         */
     </script>
 </body>
 </html>

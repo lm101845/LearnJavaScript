@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-08-24 17:53:35
- * @LastEditTime: 2021-09-10 21:14:13
- * @FilePath: \01-Promise★\01-尚硅谷李强\02-代码手敲\04-Promise自定义封装\01-初始结构搭建\index.html
+ * @LastEditTime: 2021-10-03 06:39:45
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\04-Promise自定义封装\01-初始结构搭建\index.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -15,26 +15,38 @@
 </head>
 <body>
    <script>
+       //实例化对象
         let p = new Promise((resolve, reject)=>{
             //我只要在promise.js里面声明了Promise函数，它是可以覆盖的，就不会使用原生的Promise了
             // 就会使用自己定义的Promise函数了
             // 改变对象状态的【3种】方式
-            resolve('Ok')        //第一种方式:resolve
+            //resolve('Ok')        //第一种方式:resolve
             // reject('Error')      //第二种方式:reject
             //  throw 'error'                      //第三种方式：抛出异常
             //  还有try...catch才能处理throw抛出的异常
             // 问题：try...catch我往哪里加？？
             // 因为Promise在executor(resolve, reject);执行，所以try...catch也在这里家
+            setTimeout(()=>{
+                // resolve('OK')
+                reject('error')
+                // 此时它是异步的，并不是立刻改变对象状态的——这个resolve函数它得等至少1秒钟以后才能执行
+                // 我们的同步代码肯定是不会等它的
+                // 在这种情况下，内置的Promise它必须是能成功的执行回调才可以的
+            },1000)
         })
 
         //使用then方法对成功和失败的结果做一个处理
+        //再往下走会调用then方法，此时p的状态没有发生变化，仍然是初始化的pending状态
+
         p.then(value => {
+            // 注意：这个回调函数的执行，不是在then方法里面，而是在resolve函数里面！！！
+            // 即改变状态之后才能去执行回调！！！
             console.log(value);
         },reason=>{
             console.warn(reason);
         })
 
-        console.log(p);
+        console.log('实例对象p里面有什么：',p);
    </script>
 </body>
 </html>

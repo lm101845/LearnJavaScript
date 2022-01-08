@@ -1,7 +1,7 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-31 15:08:03
- * @LastEditTime: 2021-08-24 20:32:37
+ * @LastEditTime: 2021-10-03 09:43:12
  * @FilePath: \01-尚硅谷\02-代码手敲\http-ajax-axios\02_xhr.html
 -->
 <!DOCTYPE html>
@@ -11,8 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>使用XHR封装ajax请求参数</title>
-  </head>
-  <body>
+</head>
+<body>
+    <!-- <script src="https://cdn.bootcss.com/axios/0.19.0/axios.js"></script> -->
     <button onclick="testGet()">发送GET请求</button><br /><br />
     <button onclick="testPost()">发送POST请求</button><br /><br />
     <button onclick="testPut()">发送PUT请求</button><br /><br />
@@ -30,12 +31,13 @@
         axios({
           // 里面是一个配置对象
           url: "http://localhost:3000/posts",
-        //   url: "http://localhost:3000/posts2",
+          //   url: "http://localhost:3000/posts2",
           method: "GET",
           // 默认是GET请求，本来可以不用写，这里为了让大家看的更清楚，还是写了
           params: {
+            //这个是请求体参数
             id: 1,
-            name: "zs",
+            // 这个只会请求db.json中id为1的那一条数据
           },
         }).then(
           (response) => {
@@ -54,8 +56,8 @@
           method: "POST",
           data: {
             //在请求体body里面放入data数据存进服务端
-            title: "json-server---",
-            author: "typicode9---",
+            title: "国庆快乐",
+            author: "liming",
           },
         }).then(
           (response) => {
@@ -67,10 +69,45 @@
         );
       }
 
-      /* 3. PUT请求: 服务器端更新数据*/
-
-      /* 2. DELETE请求: 服务器端删除数据*/
-
+      /* 3. PUT请求: 服务器端更新数据——写了没反应。。。。。。*/
+    //   因为用的是封装的Axios方法，它只实现了GET,POST请求，哈哈
+      function testPut() {
+        axios({
+          url: "http://localhost:3000/posts/5",
+          method: "PUT",
+          data: {
+            title: "过年好",
+            author: "筛滤淘",
+          },
+        }).then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            alert(error.message);
+          }
+        );
+      }
+      /* 4. DELETE请求: 服务器端删除数据——写了没反应。。。。。。*/
+    //   因为用的是封装的Axios方法，它只实现了GET,POST请求，哈哈
+      function testDelete(){
+        //   console.log('DELETE请求开始了');
+          axios({
+              url:'"http://localhost:3000/posts/9',
+            //   url:'"http://localhost:3000/posts',
+              method:'DELETE',
+            //   params:{
+            //       id:9
+            //   }
+          }).then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            alert(error.message);
+          }
+        );
+      }
       /* 
     1.函数的返回值为promise, 成功的结果为response, 失败的结果为error
     2.能处理多种类型的请求: GET/POST/PUT/DELETE

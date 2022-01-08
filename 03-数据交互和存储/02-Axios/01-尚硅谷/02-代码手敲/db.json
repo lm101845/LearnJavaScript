@@ -1,65 +1,48 @@
 {
   "posts": [
     {
-      "title": "json-server+++",
-      "author": "typicode+++",
+      "title": "json-server1",
+      "author": "typicode1",
       "id": 1
     },
     {
-      "title": "json-server3",
-      "author": "typicode3",
+      "title": "json-server2",
+      "author": "typicode2",
+      "id": 2
+    },
+    {
+      "title": "新年好",
       "id": 3
     },
     {
-      "title": "json-server3",
-      "author": "typicode3",
+      "title": "json-server4",
+      "author": "typicode4",
       "id": 4
     },
     {
-      "title": "json-server5",
-      "author": "typicode5",
+      "title": "过年好",
+      "author": "筛滤淘",
       "id": 5
     },
     {
+      "title": "json-server---",
+      "author": "typicode9---",
       "id": 6
     },
     {
-      "title": "json-server---",
-      "author": "typicode9---",
+      "title": "国庆快乐",
+      "author": "liming",
       "id": 7
     },
     {
-      "title": "json-server3",
-      "author": "typicode3",
+      "title": "国庆快乐",
+      "author": "liming",
+      "id": 8
+    },
+    {
+      "title": "国庆快乐",
+      "author": "liming",
       "id": 9
-    },
-    {
-      "title": "json-server---",
-      "author": "typicode---",
-      "id": 10
-    },
-    {
-      "title": "json-server---",
-      "author": "typicode9---",
-      "id": 11
-    },
-    {
-      "title": "json-server---",
-      "author": "typicode9---",
-      "id": 12
-    },
-    {
-      "title": "json-server3",
-      "author": "typicode3",
-      "id": 13
-    },
-    {
-      "title": "json-server---",
-      "author": "typicode9---",
-      "id": 14
-    },
-    {
-      "id": 15
     }
   ],
   "comments": [
