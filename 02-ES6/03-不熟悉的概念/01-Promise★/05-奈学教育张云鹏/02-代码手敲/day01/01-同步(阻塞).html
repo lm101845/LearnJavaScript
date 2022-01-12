@@ -1,0 +1,43 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-12 22:31:36
+ * @LastEditTime: 2022-01-12 23:17:50
+ * @FilePath: \02-代码手敲\day01\01-同步(阻塞).html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 单线程同步(阻塞)
+        // var a = 1
+        // var b = 2
+        // var c = a + b
+        // console.log(c)
+        //这个例⼦总c⼀定是3不会出现先执⾏第三⾏然后在执⾏第⼆⾏和第⼀⾏的情况
+
+        var a = 1;
+        var b = 2;
+        var d1 = new Date().getTime();
+        var d2 = new Date().getTime();
+
+        while (d2 - d1 < 2000) {
+            //第一次d2-d1几乎为0，然后它们相减的值肯定会慢慢变大，直到退出这个循环
+            d2 = new Date().getTime()
+        }
+
+        //这段代码在输出结果之前⽹⻚会进⼊⼀个类似假死的状态
+        console.log(a + b);
+    </script>
+</body>
+
+</html>
+
+</html>
