@@ -1,0 +1,33 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-15 21:24:15
+ * @LastEditTime: 2022-01-15 21:24:15
+ * @FilePath: \05-奈学教育张云鹏\02-代码手敲\day01\12-代码输出顺序题2.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        document.addEventListener("click", function() {
+            //点击事件是宏任务，第一个宏任务先执行
+            Promise.resolve().then(() => console.log(1));
+            //在第一个宏任务重注册的微任务，应该在下一个宏任务之前执行
+            console.log(2);
+        });
+
+        document.addEventListener("click", function() {
+            Promise.resolve().then(() => console.log(3));
+            console.log(4);
+        });
+    </script>
+</body>
+
+</html>

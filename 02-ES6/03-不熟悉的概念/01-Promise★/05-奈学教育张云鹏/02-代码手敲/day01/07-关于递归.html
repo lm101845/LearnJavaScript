@@ -1,0 +1,35 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-15 14:48:31
+ * @LastEditTime: 2022-01-15 14:56:23
+ * @FilePath: \05-奈学教育张云鹏\02-代码手敲\day01\07-关于递归.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //递归可以理解为你创建了一个有条件的循环
+        //我这段代码因为条件没有设置好，变成了死循环，退不出去了
+        var i = 0;
+
+        function task() {
+            let index = i++;
+            console.log(`递归了${index}次`);
+            task();
+            console.log(`递归了${index}次,完成`);
+            //这行代码永远无法执行，它只进行了进栈的操作，并没有出栈
+            //触发递归产生了栈溢出错误
+        }
+        task();
+    </script>
+</body>
+
+</html>

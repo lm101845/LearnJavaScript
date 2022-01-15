@@ -1,0 +1,35 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-15 22:07:33
+ * @LastEditTime: 2022-01-15 22:07:34
+ * @FilePath: \05-奈学教育张云鹏\02-代码手敲\day02\04-函数可以作为参数.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function test(fn){
+            console.log(fn);
+            fn();
+        }
+
+        //这样写你看看的不清晰的话，还可以下面这样写
+        // test(function(){
+        //     console.log(1);
+        // })
+
+        var fnc = function(){
+            console.log('我是函数变量');
+        }
+
+        test(fnc)
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 我们在介绍Promise的时候强调了他是绝对保证的意思，并且Promise对象的状态⼀旦变更就不会再发⽣变化。当
+        我们使⽤链式调⽤的时候正常都是then函数链式调⽤，但是当我们触发中断的时候catch却执⾏了。按照约定规则
+        then函数执⾏，就代表Promise对象的状态已经变更为fulfilled了，但是catch函数执⾏时，Promise对象应该是
+        rejected状态啊！这不科学。
+        在得到科学的解释前，先下⾯举个例⼦:
+        */
+        var p = new Promise(function(resolve, reject) {
+            resolve('我是Promise的值')
+        })
+        var p1 = p.then(function(res) {})
+        console.log(p)
+            // [[Prototype]]: Promise
+            // [[PromiseState]]: "fulfilled" 
+            // [[PromiseResult]]: "我是Promise的值"
+
+        console.log(p1)
+            // [[Prototype]]: Promise
+            // [[PromiseState]]: "fulfilled" 
+            // [[PromiseResult]]: undefined
+
+        console.log(p1 === p) //false
+            /**
+         * 我们会发现返回的p和p1 的状态本身就不⼀样，并且他们的对⽐结果是false，这就代表他们在堆内存中开辟了两个
+        空间，p和p1对象分别保存了两个Promise对象的引⽤地址，所以then函数虽然每次都返回Promise对象，来实现
+        链式调⽤，但是then函数每次返回的都是⼀个新的Promise对象。这样便解释的通了！也就是说每⼀次then函数在
+        执⾏时，我们都可以让本次的结果在下⼀个异步步骤执⾏时，变成不同的状态，⽽且这也不违背Promise对象最初
+        的约定。
+        */
+    </script>
+</body>
+
+</html>
