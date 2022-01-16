@@ -1,0 +1,37 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-16 13:59:42
+ * @LastEditTime: 2022-01-16 13:59:42
+ * @FilePath: \05-理解JavaScript的asyncawait\00-模板.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function getSomething() {
+            return "something";
+        }
+
+        async function testAsync() {
+            return Promise.resolve("hello async");
+        }
+
+        async function test() {
+            const v1 = await getSomething();
+            const v2 = await testAsync();
+            console.log(v1, v2);
+        }
+
+        test();
+    </script>
+</body>
+
+</html>

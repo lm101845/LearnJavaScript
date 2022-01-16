@@ -1,0 +1,56 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-16 12:03:49
+ * @LastEditTime: 2022-01-16 12:08:40
+ * @FilePath: \02-代码手敲\day02\21-Generator能控制什么样的流.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 
+         */
+        function* test() {
+            var a = yield 1
+            console.log(a)
+
+            var res = yield setTimeout(function() {
+                    return 123
+                }, 1000)
+                // clearTimeout(可以传它的id，可以取消，所以没法解决这个问题)
+            console.log(res)
+
+            var res1 = yield new Promise(function(resolve) {
+                setTimeout(function() {
+                    resolve(456)
+                }, 1000)
+            })
+            console.log(res1)
+        }
+
+        var generator = test()
+        console.log(generator)
+        var step1 = generator.next()
+        console.log(step1)
+        var step2 = generator.next()
+        console.log(step2)
+        var step3 = generator.next()
+        console.log(step3)
+        step3.value.then(function(res) {
+            console.log(res);
+        })
+        var step4 = generator.next()
+        console.log(step4)
+    </script>
+</body>
+
+</html>

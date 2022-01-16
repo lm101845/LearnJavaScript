@@ -1,0 +1,38 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-16 13:06:54
+ * @LastEditTime: 2022-01-16 13:06:54
+ * @FilePath: \02-代码手敲\day02\24-猜输出顺序.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+        * 执⾏该流程之后发现输出的结果是1，3，2。很惊喜是不是！按照Promise对象的执⾏流程function被async修饰之
+        后它本身应该变成异步函数，那么他应该在1和2输出完毕之后在输出3，但是结果却出⼈意料，这⼜⼀次打破了单
+        线程异步模型的概念。
+        别急，冷静⼀下，先回想⼀下Promise对象的结构：
+        new Promise(function(){
+        }).then(function(){
+        })
+        */
+        async function test() {
+            console.log(3)
+            return 1
+        }
+        console.log(1)
+        test()
+        console.log(2)
+    </script>
+</body>
+
+</html>

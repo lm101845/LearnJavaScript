@@ -1,0 +1,47 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-16 13:06:54
+ * @LastEditTime: 2022-01-16 13:36:09
+ * @FilePath: \02-代码手敲\day02\25-猜输出顺序.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+/**
+        我们在介绍Promise对象时，特别介绍了⼀下回调函数，并且强调他是⼀个极少数的既使⽤同步回调流程⼜使⽤了
+        异步的回调流程的对象，所以在new Promise时的function是同步流程。现在介绍这个和刚才的输出有关系吗？当
+        然有，接下来查看下⾯的逻辑，还是先猜测⼀下输出顺序：
+        综上所述，async函数中有⼀个最⼤的特点，就是第⼀个await会作为分⽔岭⼀般的存在，在第⼀个await的右侧和
+        上⾯的代码，全部是同步代码区域相当于new Promise的回调，第⼀个await的左侧和下⾯的代码，就变成了异步
+        代码区域相当于then的回调，所以就出现上⾯我们发现的灵异问题。
+        */
+        async function test() {
+            console.log(3) //同步特性
+            var a = await 4
+            console.log(a) //异步特性
+            return 1
+        }
+        console.log(1)
+            // test()
+            //这个test实际运行的代码如下：
+        new Promise(function(resolve) {
+            console.log(3);
+            resolve(4)
+        }).then(function(res) {
+            console.log(res)
+        })
+
+        console.log(2)
+    </script>
+</body>
+
+</html>

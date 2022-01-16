@@ -1,0 +1,68 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-16 13:40:14
+ * @LastEditTime: 2022-01-16 13:40:14
+ * @FilePath: \02-代码手敲\day02\26-最终的setTimeout解决代码.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function test() {
+            var res1 = await new Promise(function(resolve) {
+                setTimeout(function() {
+                    resolve('第⼀秒运⾏')
+                }, 1000)
+            })
+            console.log(res1)
+
+            var res2 = await new Promise(function(resolve) {
+                setTimeout(function() {
+                    resolve('第⼆秒运⾏')
+                }, 1000)
+            })
+            console.log(res2)
+
+            var res3 = await new Promise(function(resolve) {
+                setTimeout(function() {
+                    resolve('第三秒运⾏')
+                }, 1000)
+            })
+            console.log(res3)
+        }
+
+        test()
+
+        // var res1 = new Promise(function(resolve) {
+        //     setTimeout(function() {
+        //         resolve('第⼀秒运⾏')
+        //     }, 1000)
+        // })
+        // console.log(res1)
+
+        // var res2 =new Promise(function(resolve) {
+        //     setTimeout(function() {
+        //         resolve('第⼆秒运⾏')
+        //     }, 1000)
+        // })
+        // console.log(res2)
+
+        // var res3 =new Promise(function(resolve) {
+        //     setTimeout(function() {
+        //         resolve('第三秒运⾏')
+        //     }, 1000)
+        // })
+        // console.log(res3)
+        //这样写就会一起执行了
+    </script>
+</body>
+
+</html>
