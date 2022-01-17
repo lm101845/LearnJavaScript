@@ -4,7 +4,8 @@
  * @LastEditTime: 2021-11-24 16:53:10
  * @FilePath: \02-手册指南\02-接口\04-只读属性.ts
  */
-interface Point {
+(function () {
+    interface Point {
   readonly x: number;
   readonly y: number;
 }
@@ -28,3 +29,4 @@ let ro: ReadonlyArray<number> = a;
 a = ro as number[];
 
 // 最简单判断该用readonly还是const的方法是看要把它做为变量使用还是做为一个属性。 做为变量使用的话用 const，若做为属性则使用readonly。
+})()

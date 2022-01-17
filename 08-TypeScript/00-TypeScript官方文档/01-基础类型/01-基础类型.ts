@@ -1,11 +1,13 @@
 /*
  * @Author: liming
  * @Date: 2021-11-24 11:00:58
- * @LastEditTime: 2021-11-24 12:00:24
- * @FilePath: \02-手册指南\01-基础类型.ts
+ * @LastEditTime: 2022-01-17 16:49:40
+ * @FilePath: \00-TypeScript官方文档\01-基础类型\01-基础类型.ts
  */
-let isDone: boolean = false;
 
+//布尔值
+let isDone: boolean = false;
+//数字：和JavaScript一样，TypeScript里的所有数字都是浮点数。
 let decLiteral: number = 6;
 
 let name1: string = "bob";
