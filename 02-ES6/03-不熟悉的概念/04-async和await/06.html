@@ -1,0 +1,51 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-10 09:22:56
+ * @LastEditTime: 2022-02-10 09:22:56
+ * @FilePath: \04-async和await\0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 很多人以为await会一直等待之后的表达式执行完之后才会继续执行后面的代码，
+         * 实际上await是一个让出线程的标志。await后面的函数会先执行一遍(比如await Fn()的Fn ,
+         * 并非是下一行代码)，然后就会跳出整个async函数来执行后面js栈的代码。
+         * 等本轮事件循环执行完了之后又会跳回到async函数中等待await****后面表达式的返回值，
+         * 如果返回值为非promise则继续执行async函数后面的代码，
+         * 否则将返回的promise放入Promise队列（Promise的Job Queue）
+        */
+        const timeoutFn = function (timeout) {
+            return new Promise(function (resolve) {
+                return setTimeout(resolve, timeout);
+            });
+        }
+
+        async function fn() {
+            await timeoutFn(1000);
+            await timeoutFn(2000);
+            return '完成';  //等了3秒
+
+            /**
+             * 这里本可以用箭头函数写方便点，但是为了便于阅读本质，
+             * 还是换成了ES5写法，上面执行函数内所有的await函数才会返回状态，
+             * 结果是执行完毕3秒后才会弹出'完成'。
+             正常情况下，await 命令后面跟着的是 Promise ，
+             如果不是的话，也会被转换成一个 立即 resolve 的 Promise。
+            */
+        }
+
+        fn().then(success => console.log(success));
+    </script>
+</body>
+
+</html>
