@@ -1,0 +1,50 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-10 15:34:55
+ * @LastEditTime: 2022-02-10 17:32:02
+ * @FilePath: \06-阮一峰\08.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //通过⼀个超⻓的链式调⽤我们学习⼀下链式调⽤的注意事项
+        var p = new Promise(function (resolve, reject) {
+            resolve('我是Promise的值')
+        })
+        console.log(p) //1
+        p.then(function (res) {
+                //该res的结果是resolve传递的参数
+                console.log(res)
+            }).then(function (res) {
+                //该res的结果是undefined
+                console.log(res)
+                return '123'
+            }).then(function (res) {
+                //该res的结果是123
+                console.log(res)
+                return new Promise(function (resolve) {
+                    resolve(456)
+                })
+            }).then(function (res) {
+                //该res的结果是456
+                console.log(res)
+                return '我是直接返回的结果'
+            }).then()
+            .then('我是字符串')
+            .then(function (res) {
+                //该res的结果是“我是直接返回的结果”
+                console.log(res)
+            })
+    </script>
+</body>
+
+</html>
