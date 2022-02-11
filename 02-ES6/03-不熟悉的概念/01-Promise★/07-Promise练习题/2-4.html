@@ -1,0 +1,39 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-11 15:55:48
+ * @LastEditTime: 2022-02-11 15:55:50
+ * @FilePath: \07-Promise练习题\01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const promise1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('success')
+            }, 1000)
+        })
+
+        const promise2 = promise1.then(() => {
+            throw new Error('error!!!')
+        })
+
+        console.log('promise1', promise1)  //1 宏1
+        console.log('promise2', promise2)  //2 微1，等宏1完
+
+        setTimeout(() => {
+            console.log('promise1', promise1)
+            console.log('promise2', promise2)
+        }, 2000)
+    </script>
+</body>
+
+</html>

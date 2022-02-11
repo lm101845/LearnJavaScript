@@ -1,0 +1,31 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-11 15:55:48
+ * @LastEditTime: 2022-02-11 15:55:50
+ * @FilePath: \07-Promise练习题\01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function async1() {
+            console.log("async1 start");  //1
+            new Promise(resolve => {
+                console.log('promise')  //2
+            })
+            console.log("async1 end");  //4
+        }
+        async1();
+        console.log("start")  //3
+    </script>
+</body>
+
+</html>
