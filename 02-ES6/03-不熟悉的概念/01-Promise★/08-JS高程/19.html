@@ -1,0 +1,43 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-15 09:34:01
+ * @LastEditTime: 2022-02-15 09:34:04
+ * @FilePath: \08-JS高程\01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('begin synchronous execution');
+        try {
+            throw Error('foo');
+        } catch (e) {
+            console.log('caught error', e);
+        }
+        console.log('continue synchronous execution');
+        // begin synchronous execution
+        // caught error Error: foo
+        // continue synchronous execution
+        new Promise((resolve, reject) => {
+            console.log('begin asynchronous execution');
+            reject(Error('bar'));
+        }).catch((e) => {
+            console.log('caught error', e);
+        }).then(() => {
+            console.log('continue asynchronous execution');
+        });
+        // begin asynchronous execution
+        // caught error Error: bar
+        // continue asynchronous execution
+    </script>
+</body>
+
+</html>
