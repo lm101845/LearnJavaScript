@@ -6,8 +6,12 @@
  */
 
 //1.定义函数的几种方式——效果一样的
+//用函数定义
+function add(x: number, y: number):number { 
+    return x + y;
+}
 //用变量定义函数
-let add: (x: number, y: number) => number;
+let add2: (x: number, y: number) => number;
 
 //2.用接口定义函数
 interface Add { 
@@ -16,7 +20,7 @@ interface Add {
 
 //3.混合别名
 type Add2 = (x: number, y: number) => number
-let add2: Add2 = (a, b) => a + b;
+let add3: Add2 = (a, b) => a + b;
 
 //混合类型接口
 interface Lib { 
