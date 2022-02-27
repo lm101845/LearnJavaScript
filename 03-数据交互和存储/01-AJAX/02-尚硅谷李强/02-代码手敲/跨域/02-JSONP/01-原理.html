@@ -1,0 +1,41 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-28 16:39:08
+ * @LastEditTime: 2021-07-28 17:03:42
+ * @FilePath: \02-尚硅谷李强\02-代码手敲\跨域\02-JSONP\01-原理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #result {
+        width: 300px;
+        height: 100px;
+        border: 1px solid #78e;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="result"></div>
+    <script>
+      //把这个函数放到前面
+      //处理数据
+      // console.log(data);
+      //这个函数前端必须要提前生命，不然没有这个含漱液就会报错
+      function handle(data) {
+        //获取result元素
+        const result = document.getElementById("result");
+        result.innerHTML = data.name;
+      }
+    </script>
+    <!-- <script src="http://127.0.0.1:5500/02-%E4%BB%A3%E7%A0%81%E6%89%8B%E6%95%B2/%E8%B7%A8%E5%9F%9F/02-JSONP/js/app.js"></script> -->
+    <!-- 这个js文件返回的结果是一个数据外加一个函数的调用 -->
+    <!-- <script src="./js/app.js"></script> -->
+    <!-- 这个标签是可以跨域的！！！ -->
+    <script src="http://localhost:8000/jsonp-server"></script>
+  </body>
+</html>

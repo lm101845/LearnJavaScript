@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            height: 200px;
+            background-color: orange;
+            overflow: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1">
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+    </div>
+
+    <script>
+        let div1 = document.querySelector('#div1')
+
+        function move(e) {
+            this.innerText = `(${e.offsetX}, ${e.offsetY})`
+        }
+
+        function throttle(fn, wait) {
+            let time = 0
+            return function () {
+                let now = Date.now()
+                let args = arguments
+                if (now - time > wait) {
+                    fn.apply(this, args)
+                    time = now
+                }
+            }
+        }
+        // 这个版本的时间戳节流当我们的鼠标移出监听区域的时候,即停止运行了.
+
+        let throttleMove = throttle(move, 500)
+        div1.onmousemove = throttleMove
+    </script>
+</body>
+
+</html>

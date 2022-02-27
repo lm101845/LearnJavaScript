@@ -1,0 +1,36 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-17 13:46:11
+ * @LastEditTime: 2021-08-17 13:53:53
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\02-PromiseAPI\03-改变状态和指定回调执行顺序问题.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+            // resolve('OK');
+            // 问题：改变状态的函数resolve先执行还是执行回调的函数(then)先执行？？？
+            // 回答：2种情况都是有可能出现的
+
+            // 当resolve是同步任务的时候，resolve先执行,反之，then先执行
+            // 实际使用Promise的时候，resolve是异步任务的情况居多——比如封装fs,数据库，ajax操作等  
+            setTimeout(()=>{
+            resolve('OK');
+            },1000)
+        })
+
+        p.then(value => {
+            console.log(value);
+        },reason => {
+
+        })
+    </script>
+</body>
+</html>

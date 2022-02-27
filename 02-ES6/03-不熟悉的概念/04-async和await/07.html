@@ -1,0 +1,68 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-10 09:22:56
+ * @LastEditTime: 2022-02-10 09:22:56
+ * @FilePath: \04-async和await\0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function timeout(time) {
+            return new Promise(function (resolve) {
+                return setTimeout(function () {
+                    return resolve(time + 200)
+                }, time);
+            })
+        }
+
+        function first(time) {
+            console.log('第一次延迟了' + time);
+            return timeout(time);
+        }
+
+        function second(time) {
+            console.log('第二次延迟了' + time);
+            return timeout(time);
+        }
+
+        function third(time) {
+            console.log('第三次延迟了' + time);
+            return timeout(time);
+        }
+
+        // function start() {
+        //     console.log('START');
+        //     const time1 = 500;
+        //     first(time1).then(time2 => second(time2))
+        //         .then(time3 => third(time3))
+        //         .then(res => {
+        //             console.log('最后一次延迟' + res);
+        //             console.timeEnd('END');
+        //         })
+        // };
+        // start();
+
+        //使用async,await
+        async function start2() {
+            console.log('START');
+            const time1 = 500;
+            const time2 = await first(time1);
+            const time3 = await second(time2);
+            const res = await third(time3);
+            console.log(`最后一次延迟${res}`);
+            console.log('END');
+        }
+        start2();
+    </script>
+</body>
+
+</html>

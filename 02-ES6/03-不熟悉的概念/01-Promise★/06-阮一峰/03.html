@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 虽然 then 是同步执行，并且状态也已经变更。
+         * 但这并不代表每次遇到 then 时我们都需要把它的回调丢入微任务队列中，
+         * 而是等待 then 的回调执行完毕后再根据情况执行对应操作。
+         * 基于此，我们可以得出第一个结论：链式调用中，只有前一个 then 的回调执行完毕后，跟着的 then 中的回调才会被加入至微任务队列。
+        */
+        Promise.resolve()
+            .then(() => {
+                console.log("then1");
+                Promise.resolve().then(() => {
+                    console.log("then1-1");
+                });
+            })
+            .then(() => {
+                console.log("then2");
+            });
+    </script>
+</body>
+
+</html>

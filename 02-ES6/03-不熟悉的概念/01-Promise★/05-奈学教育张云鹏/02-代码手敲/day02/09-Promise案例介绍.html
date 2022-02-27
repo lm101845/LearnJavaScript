@@ -1,0 +1,49 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-15 22:25:45
+ * @LastEditTime: 2022-01-15 22:25:46
+ * @FilePath: \05-奈学教育张云鹏\02-代码手敲\day02\09-Promise案例介绍.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+                 * 经过了上⾯的代码我们可以分析⼀下Promise的运⾏流程和结构，⾸先从运⾏流程上我们发现了new Promise中的
+                    回调函数确实是在同步任务中执⾏的，其次是如果这个回调函数内部没有执⾏resolve或者reject那么p对象的后⾯
+                    的回调函数内部都不会有输出，⽽运⾏resolve函数之后.then和.finally就会执⾏，运⾏了reject之后.catch和.finally
+                    就会执⾏。
+                */
+        //实例化⼀个Promise对象
+        console.log(1);
+        var p = new Promise(function (resolve, reject) {
+            //我们在new Promise的时候，传入的这个function，它是同步结构，它不是异步的
+            /**
+             * 参考上⾯的Promise对象结构，⼀个Promise对象包含两部分回调函数，第⼀部分是new Promise时候传⼊的对
+                象，这段回调函数是同步的，⽽.then.catch.finally中的回调函数是异步的，这⾥我们提前记好。
+                注：resolve并不直接代表then中的回调函数，而是它能触发这个函数执行
+            */
+            console.log(3);
+        })
+        //通过链式调⽤控制流程
+        //下面的then,catch,finally，我们虽然调用了，但是它内部的回调函数并没有触发(因为resolve,reject这两个参数我们没有用到)
+        p.then(function () {
+            console.log('then执⾏')
+        }).catch(function () {
+            console.log('catch执⾏')
+        }).finally(function () {
+            console.log('finally执⾏')
+        })
+        console.log(2);
+    </script>
+</body>
+
+</html>

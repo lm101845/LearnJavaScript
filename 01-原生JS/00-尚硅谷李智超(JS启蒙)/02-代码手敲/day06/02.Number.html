@@ -1,0 +1,58 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			/*  
+			*在JS中所有的数值都是Number类型
+			* 包括整数和浮点数（小数）
+			*/
+		   
+		   
+		   //数字123
+		   var a = 123;
+		   //a = 456.789;
+		   
+		   //字符串123
+		   var b = "123";
+		   
+		   /* 
+		   *可以使用一个运算符typeof来检查一个变量的类型
+		   * 语法：typeof 变量
+		   * 检查字符串时，会返回string（小写）
+		   * 检查数值时，会返回number(小写)
+		   * 使用typeof检查Infinity也会返回Number
+		   * NaN是一个特殊的数字，表示Not a Number
+		   * 使用typeof检查NaN也会返回一个number(小写)
+		   */
+		  console.log(Number.MAX_VALUE)  //这是JS中可以表示的最大值   1.7976931348623157e+308
+		  a = Number.MAX_VALUE*Number.MAX_VALUE     //Infinity   正无穷大    -Infinity   负无穷大
+		  //如果使用Number表示的数字超过了最大值,则会返回一个Infinity,超过最小值会返回-Infinity 
+		  a = Infinity;
+		  a = "abc" * "bcd";
+		  a = NaN;
+		  //console.log(typeof a)    //检查a的类型,并把结果显示在控制台上  
+		  
+		  a = Number.MIN_VALUE;
+		  console.log(a);     //返回的是0以上的最小值 5e-324   而不是-1.7976931348623157e+308
+		  
+		  //在JS中整数的运算可以基本保证精确	
+		  var c = 123 + 456;
+		  
+		  //如果使用JS进行浮点运算,可能得到一个不精确的结果
+		  //十进制里不能精确表示1/3,   二进制里不能精确表示1/10  所有的语言都有这个问题,很多语言可以解决,但是JS很难解决
+		  //所以千万不要使用JS进行对精确度要求比较高的运算(算钱）)
+		  var c = 0.1 + 0.2;   //结果是0.30000000000000004
+		  console.log(c);
+		  
+		  console.log(typeof b)
+		   console.log(a);
+		   console.log(b);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+
+<!-- 看1 -->

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+        * reduce() 方法接受一个数组作为输入值并返回一个值。这点挺有趣的。reduce 接受一个回调函数，回调函数参数包括一个累计器（数组每一段的累加值，它会[像雪球一样增长](Understanding the
+        Almighty Reducer | CSS-Tricks)），当前值，和索引。reduce 也接受一个初始值作为第二个参数：
+        * 
+        * let finalVal = oldArray.reduce((accumulator, currentValue, currentIndex, array) => {
+        ...
+        }), initalValue;
+        * 
+        * */
+        // our list of ingredients in an array
+        const ingredients = ['wine', 'tomato', 'onion', 'mushroom']
+
+        // a cooking function
+        const cook = (ingredient) => {
+            return `cooked ${ingredient}`
+        }
+
+        console.log(cook);
+
+        const wineReduction = ingredients.reduce((sauce, item) => {
+            return sauce += cook(item) + ','
+        }, '')
+
+        console.log(wineReduction);
+        /**
+         * 初始值（这个例子中的 ''）很重要，它决定了第一个作料能够进行烹饪。这里输出的结果不太靠谱，自己炒菜时要当心。下面的例子就是我要说到的情况：
+         * 
+         */
+
+        const wineReduction1 = ingredients.reduce((sauce, item, index, array) => {
+            sauce += cook(item)
+            if (index < array.length - 1) {
+                sauce += ', '
+            }
+            return sauce
+        }, '')
+        console.log(wineReduction1);
+    </script>
+</body>
+
+</html>

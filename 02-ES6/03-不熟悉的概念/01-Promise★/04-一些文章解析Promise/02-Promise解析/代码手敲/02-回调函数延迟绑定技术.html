@@ -1,0 +1,41 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-12 01:32:25
+ * @LastEditTime: 2021-08-12 01:37:20
+ * @FilePath: \01-Promise★\04-一些文章解析Promise\02-Promise解析\代码手敲\02-回调函数延迟绑定技术.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        /**
+         *Promise 采用了回调函数延迟绑定技术，在执行 resolve 函数的时候，
+         *回调函数还没有绑定，那么只能推迟回调函数的执行。这具体是啥意思呢？我们先来看下面的例子： 
+         */
+      let p1 = new Promise((resolve, reject) => {
+        console.log(1);
+        resolve("浪里白条");
+        console.log(2);
+      });
+
+      //then:设置成功或者失败后处理的方法
+      p1.then(
+        (result) => {
+          //p1延迟绑定回调函数
+          console.log("成功:" + result);
+        },
+        (reason) => {
+          console.log("失败 " + reason);
+        }
+      );
+
+      console.log(3);
+    </script>
+  </body>
+</html>

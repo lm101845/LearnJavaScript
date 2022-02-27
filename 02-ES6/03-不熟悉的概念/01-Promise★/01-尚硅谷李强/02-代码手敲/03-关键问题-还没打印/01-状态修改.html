@@ -1,0 +1,32 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-17 13:34:20
+ * @LastEditTime: 2021-08-17 13:38:10
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\01-Promise的基本使用\12-状态修改.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+            // 有3种方式可以改变Promise的状态
+            //1.调用resolve函数
+            //resolve('ok')   //pending=>fulfilled(resolved)
+
+            //2.reject函数
+            //reject('error') //pending=>rejected()
+
+            //3.抛出错误(抛字符串或者说Error的实例对象都是可以的 )
+            throw '出问题了'
+        })
+
+        console.log(p);
+    </script>
+</body>
+</html>

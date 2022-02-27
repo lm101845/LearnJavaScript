@@ -1,0 +1,53 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-15 15:07:57
+ * @LastEditTime: 2022-01-15 20:39:53
+ * @FilePath: \05-奈学教育张云鹏\02-代码手敲\day01\09-宏任务和微任务大体介绍.html
+-->
+
+<!-- 
+    在明确了事件循环模型以及JavaScript的执⾏流程后，我们认识了⼀个叫做任务队列的容器，他的数据结构式队列
+的结构。所有除同步任务外的代码都会在⼯作线程中，按照他到达的时间节点有序的进⼊任务队列，⽽且任务队列
+中的异步任务⼜分为【宏任务】和【微任务】
+注：上面这句话其实不够严谨，因为微任务其实并不是队列结构的，但是它的效果是一样的
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //执行栈如果有占用的话，任务队列得等着
+        //宏任务：setTimeout
+        // 微任务：Promise.resolve().then
+        //代码执行顺序：同步代码先执行——>异步代码后执行(异步代码中的宏任务)
+        var a = '我是同步代码';
+        setTimeout(function() {
+            Promise.resolve().then(function() {
+                console.log('我是宏任务1中的微任务'); //4
+            })
+            console.log('我是宏任务1'); //3
+            setTimeout(function() {
+                console.log('我是宏任务1中的宏任务'); //6
+            })
+        }, 0);
+
+        setTimeout(function() {
+            console.log('我是宏任务2'); //5
+        }, 0);
+
+        Promise.resolve().then(function() {
+            console.log('我是微任务'); //2
+        });
+
+        console.log(a); //1
+    </script>
+</body>
+
+</html>

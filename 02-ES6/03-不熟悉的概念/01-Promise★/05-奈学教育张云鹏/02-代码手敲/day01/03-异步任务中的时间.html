@@ -1,0 +1,56 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-12 22:54:46
+ * @LastEditTime: 2022-01-12 23:07:40
+ * @FilePath: \02-代码手敲\day01\03-异步任务中的时间.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 1
+        var b = 2
+
+        setTimeout(function() {
+            console.log('第一个任务');
+            var d1 = new Date().getTime()
+            var d2 = new Date().getTime()
+            while (d2 - d1 < 2000) {
+                d2 = new Date().getTime()
+            }
+        }, 1000)
+
+        setTimeout(function() {
+            console.log('第二个异步流程');
+        }, 1000)
+
+        /**
+         * 两个异步任务都是1秒钟后等待执行(如果等了1秒钟后还有同步任务没有执行完，也还是会继续等的)，
+         * 只不过第一个异步任务里面还写了一个2s的循环，需要额外消耗2秒中
+         * 问题：2个异步任务都是要等1秒后执行，并且第一个异步任务排在第二个异步任务前面，所以理应说第一个异步任务先执行
+         * 但是第一个异步任务等完1秒后还需要额外消耗2秒钟执行完这个循环，那么请问第二个异步任务看到这种情况还能老老实实的等这2秒钟吗
+         * 它会不会不耐烦，虽然位置排第二，但是提前执行呢？？？？？
+         * 答案：不会，异步任务地位低下(同步任务才是人上人)，而且生性胆小，不敢反抗，逆来顺受，所以第二个异步任务不会插队！！！
+         * 
+         * 异步任务也是分先后的，第一个异步任务没有执行完之前，第二个异步任务只能无条件等着 
+         * 
+         * 记住：JS是单线程的，同一时间只能做同一件事。
+         * 所以同步任务需要排队，【一个一个执行】，不过它们相较异步任务优先级比较高
+         * 异步任务也需要排队，【一个一个执行】  。
+         *          
+         */
+
+        console.log(a + b)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-17 13:23:52
+ * @LastEditTime: 2021-10-03 07:25:48
+ * @FilePath: \01-尚硅谷李强\02-代码手敲\02-Promise-API\04-Promise的API-all.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let p1 = new Promise((resolve, reject) => {
+        resolve("OK");
+        //  把p1设定为一个成功的状态
+      });
+
+      // let p2 = Promise.resolve('Success')
+      let p2 = Promise.reject("Error");
+    //如果传入的 promise 中有一个失败（rejected），Promise.all 异步地将失败的那个结果给失败状态的回调函数，而【不管其它promise是否完成】。
+      let p3 = Promise.resolve("Oh Yeah");
+    //   p2.catch((reason) => {
+    //     console.log(reason);
+    //   });
+    // 写了这个也不行
+      const result = Promise.all([p1, p2, p3]);
+      console.log('result的值为11111',result);
+    //   result.then(value=>{
+    //       console.log(value);
+    //   })
+    // 写了这个也不行
+      console.log('result的值为2222',result);
+    </script>
+  </body>
+</html>

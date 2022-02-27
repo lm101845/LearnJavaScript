@@ -1,0 +1,46 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-16 14:08:30
+ * @LastEditTime: 2022-01-16 14:08:30
+ * @FilePath: \05-理解JavaScript的asyncawait\03-async\await 帮我们干了啥.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //写法1：
+        // function takeLongTime() {
+        //     return new Promise(resolve => {
+        //         setTimeout(() => resolve("long_time_value"), 1000);
+        //     });
+        // }
+
+        // takeLongTime().then(v => {
+        //     console.log("got", v);
+        // });
+
+        //写法2：
+        function takeLongTime() {
+            return new Promise(resolve => {
+                setTimeout(() => resolve("long_time_value"), 1000);
+            });
+        }
+
+        async function test() {
+            const v = await takeLongTime();
+            console.log(v);
+        }
+
+        test();
+    </script>
+</body>
+
+</html>

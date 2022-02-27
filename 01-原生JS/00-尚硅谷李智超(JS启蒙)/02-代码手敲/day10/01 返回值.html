@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		/**
+		 * 创建一个函数，用来计算三个数的和
+		 *
+		 * 可以使用return来设置函数的返回值
+		 * 		语法：
+		 * 			return 值
+		 *
+		 * return后的值将会作为函数的执行结果返回
+		 * 		可以定义一个变量，可以接收该结果
+		 */
+		function sum(a , b , c){
+			//alert(a + b + c);
+			var d = a + b + c;
+
+			//return后面如果不跟值的话就相当于return undefined;
+			//如果不写return也会返回undefined
+			return d;
+
+			//return后的语句都不会执行，这是死代码
+			alert("hello");  
+
+			//return后可以跟任意类型的值 
+		}
+
+		//调用函数
+		//变量result的值就是函数的执行结果	
+		//函数返回什么result的值就是什么  result 就是4+7+8的结果
+		//sum(1,2,3);
+		var result = sum(4 , 7 , 8);
+		console.log("result = " + result);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
+
+<!-- 看1 -->

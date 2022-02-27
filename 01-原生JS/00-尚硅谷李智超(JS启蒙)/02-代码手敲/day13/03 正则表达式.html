@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		/**
+		 * 检查一个字符串中是否含有点(.)
+		 * .属于元字符[(Metacharacter)是拥有特殊含义的字符],查找单个字符，除了换行和行结束符。
+		 * 在正则表达式中使用\作为转义字符
+		 * \.可以来表示.
+		 * \\今天用来表示\
+		 *
+		 * 注意：使用构造函数时，由于它的参数是字符串，而\是字符串中的转义字符，
+		 * 	如果要使用\,则需要使用\\来代替
+		 */
+		
+		var reg = /./;
+		console.log(reg.test("."));  //true
+		console.log(reg.test("abcded"));  //true!!!!
+
+		 reg = /\./;
+		console.log(reg.test("abcded"));  //false  这下才能正确识别.
+
+		reg = new RegExp("\\.");
+		console.log(reg);  //  /\./
+
+		/**
+		 * \w  --任意字母、数字、下划线 相当于[A-z0-9]
+		 * \W  --除了字母、数字、下划线 相当于[^A-z0-9]
+		 * \s  --空格
+		 * \S  --除了空格
+		 * \D  --除了数字
+		 * \d  --任意数字
+		 * \b  --单词边界
+		 * \B  --除了单词边界
+		 */
+		
+		reg = /\w/;
+		console.log(reg.test("e"));  //true
+
+		/**
+		 * 创建一个正则表达式检查一个字符串中是否含有单词child
+		 */
+		reg = /child/;
+		console.log(reg.test("hello children"));  
+		//true 检查是否有child，只要有child,无论它是否是个独立的单词，都行
+		
+		reg = /\bchild\b/;
+		console.log(reg.test("hello children"));   //false
+		console.log(reg.test("hello child"));		//true
+
+		//接收一个用户的输入
+		//var str = prompt("请输入你的用户名:");
+		//console.log(str); 
+
+		//去除掉字符串中前后的空格（中间的空格不管的）
+		//去除空格就是使用""来替换空格
+		var str = "           he       llo                ";
+		//去除前面的(多个)空格
+		str = str.replace(/^\s*/,"");
+		console.log(str);
+
+		//去除结尾的(多个)空格
+		str = str.replace(/\s*$/,"");
+		console.log(str);
+
+		//同时去开头和结尾的多个空格
+		str = str.replace(/^\s* | \s*$/g,"");
+		console.log(str);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

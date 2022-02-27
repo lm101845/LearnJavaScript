@@ -1,0 +1,45 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-12 23:48:59
+ * @LastEditTime: 2022-01-12 23:59:26
+ * @FilePath: \02-代码手敲\day01\05-JavaScript的运⾏模型.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function task1() {
+            console.log('第⼀个任务')
+        }
+
+        function task2() {
+            console.log('第⼆个任务')
+        }
+
+        function task3() {
+            console.log('第三个任务')
+        }
+
+        function task4() {
+            console.log('第四个任务')
+        }
+        task1()
+            //因为同步代码必须要立即执行，所以task1进栈后它就出栈了，不会等着4进栈的
+            //什么时候能触发栈的叠加，老师说等他讲到递归的时候再说
+            //注：异步任务是在工作线程里面等待时间到期的(任务块是在工作线程里面堆积的)，不是在任务队列里面等时间到期的
+            //进入到任务队列是一瞬间的事情，触发执行栈被占用，不然任务队列是不会堆积任务块的
+        setTimeout(task2, 1000)
+        setTimeout(task3, 500)
+        task4()
+    </script>
+</body>
+
+</html>

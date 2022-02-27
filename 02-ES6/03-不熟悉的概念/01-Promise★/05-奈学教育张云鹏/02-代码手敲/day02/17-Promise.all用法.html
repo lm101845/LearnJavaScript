@@ -1,0 +1,63 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-01-16 11:35:45
+ * @LastEditTime: 2022-01-16 11:35:46
+ * @FilePath: \02-代码手敲\day02\17-Promise.all用法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+        * 当我们在代码中需要使⽤异步流程控制时，可以通过Promise.then来实现让异步流程⼀个接⼀个的执⾏，假设实际
+        案例中，某个模块的⻚⾯需要同时调⽤3个服务端接⼝，并保证三个接⼝的数据全部返回后，才能渲染⻚⾯。这种
+        情况如果a接⼝耗时1s、b接⼝耗时0.8s、c接⼝耗时1.4s，如果只⽤Promise.then来执⾏流程控制，可以保证三个
+        接⼝按顺序调⽤结束再渲染⻚⾯，但是如果通过then函数的异步控制，必须等待每个接⼝调⽤完毕才能调⽤下⼀
+        个，这样总耗时就是1+0.8+1.4 = 3.2s。这种累加显然增加了接⼝调⽤的时间消耗，所以Promise提供了⼀个all⽅
+        法来解决这个问题：Promise.all([promise对象,promise对象,...]).then(回调函数)
+        回调函数的参数是⼀个数组，按照第⼀个参数的promise对象的顺序展示每个promise的返回结果。
+        我们可以借助Promise.all来实现，等最慢的接⼝返回数据后，⼀起得到所有接⼝的数据，那么这个耗时将会只会按
+        照最慢接⼝的消耗时间1.4s执⾏，总共节省了1.8s，参考代码如下：
+        */
+
+        //promise.all相当于统⼀处理了
+        //多个promise任务，保证处理的这些所有promise
+        //对象的状态全部变成为fulfilled之后才会出发all的
+        //.then函数来保证将放置在all中的所有任务的结果返回
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('第⼀个promise执⾏完毕')
+            }, 1000)
+        })
+        let p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // resolve('第⼆个promise执⾏完毕')
+                reject('假设第二个Prmoise失败了')
+            }, 2000)
+        })
+        let p3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('第三个promise执⾏完毕')
+            }, 300)
+        })
+        Promise.all([p1, p3, p2]).then(res => {
+            //里面不管顺序怎么样，都会按照最慢的接口所需时间来执行
+            //我们传入n个Promise的时候，如果某个失败了，则会触发第一个失败的Promise的catch
+            //只要有一个失败了，then就不会触发了
+            //Prmoise.all是一条船上的蚂蚱，只要有一个接口调用失败，then就不会执行
+            console.log(res, '这个拿到的是所有的res')
+        }).catch(function(err) {
+            console.log(err)
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-16 11:49:51
+ * @LastEditTime: 2022-02-16 15:29:54
+ * @FilePath: \11-事件\03.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="myBtn">测试按钮</button>
+    <script>
+        /**
+         * 以上代码为按钮添加了会在事件冒泡阶段触发的 onclick 事件处理程序（因为最后一个参数值为
+         false ）。与 DOM0 方式类似，这个事件处理程序同样在被附加到的元素的作用域中运行。使用 DOM2
+         方式的主要优势是可以为同一个事件添加多个事件处理程序。
+        */
+        let btn = document.getElementById("myBtn");
+
+        btn.addEventListener("click", (event) => {
+            console.log(event);
+            console.log(this);
+            console.log(this == event);
+            console.log(event.type);
+            console.log(event.target.id);
+        }, false);
+
+        btn.addEventListener("click", () => {
+            console.log("Hello world!");
+        }, false);
+    </script>
+</body>
+
+</html>

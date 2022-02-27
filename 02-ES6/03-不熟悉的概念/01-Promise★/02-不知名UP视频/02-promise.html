@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
+    <script>
+      console.log("1");
+      $.ajax({
+        type: "get",
+        url:
+          //   "https://mockapi.eolinker.com/2ejldur7fcf1445f935c2161108Af300c7bd64fd0e257ge/test",
+          "http://152.136.185.210:7878/api/m5/recommend",
+        success: function (response) {
+          //   console.log(response);
+          console.log(response.list[0].price);
+        },
+      });
+      console.log("2");
+    </script>
+  </body>
+</html>

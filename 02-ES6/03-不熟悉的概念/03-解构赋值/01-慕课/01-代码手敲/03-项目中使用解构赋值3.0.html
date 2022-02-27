@@ -1,0 +1,35 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-03 22:19:28
+ * @LastEditTime: 2021-08-03 22:54:21
+ * @FilePath: \01-代码手敲\03-项目中使用解构赋值3.0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+      <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script>
+        // axios.get('./data.json').then(function(res){
+        //     console.log(res);
+        //     console.log('===============');
+        //     //注意要用live-server打开
+        //     console.log(res.data);
+        //     console.log('===============');
+        // })
+
+        //    axios.get('./data.json').then(data=>{
+        //     console.log(data);
+        // })
+
+              axios.get('./data.json').then(({data:{name,type}})=>{
+            console.log(name,type);
+        })
+    </script>
+  </body>
+</html>

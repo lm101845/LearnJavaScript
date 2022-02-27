@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
+    <script>
+      console.log("a");
+      console.log("b");
+      console.log("c");
+      setTimeout(() => {
+        console.log("我饭卡拿到了");
+      }, 2000);
+      //   异步操作
+      //   第一个参数是一个函数
+      // 而二个参数是一个时间
+      //   setTimeout这段代码并没有阻塞程序的执行，它让后面的程序先执行了，2秒后它才执行的
+      console.log("d");
+      console.log("e");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    没有做防抖：<input id="ipt1"><br>
+    防抖简易版：<input id="ipt2">
+    <script>
+        // 1.没有做防抖是这样的
+        let ipt1 = document.querySelector('#ipt1')
+        ipt1.onkeydown = function (e) {
+            console.log(e.target.value);
+        }
+    </script>
+
+    <script>
+        // 2.加了防抖效果的代码——简易版
+        let ipt2 = document.querySelector('#ipt2')
+        let timer = null
+        ipt2.onkeydown = function (e) {
+            // clearTimeout是一个函数，功能是清除定时器。
+            // 开启一个新的定时器必须清除之前的定时器。
+            clearTimeout(timer)
+            // timer就是这个定时器的名字
+            timer = setTimeout(() => {
+                console.log(e.target.value);
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

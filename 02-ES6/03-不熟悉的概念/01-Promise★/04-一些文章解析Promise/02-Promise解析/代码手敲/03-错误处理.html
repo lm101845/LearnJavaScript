@@ -1,0 +1,46 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-12 01:40:13
+ * @LastEditTime: 2021-08-12 01:45:35
+ * @FilePath: \01-Promise★\04-一些文章解析Promise\02-Promise解析\代码手敲\03-错误处理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function executor(resolve, reject) {
+        let rand = Math.random();
+        console.log(1);
+        console.log(rand);
+        if (rand > 0.001) {
+          resolve();
+        } else {
+          reject();
+        }
+      }
+
+      var p0 = new Promise(executor);
+      //把executor函数当作参数传递
+      var p1 = p0.then((value) => {
+        console.log("succeed-1");
+        return new Promise(executor);
+      });
+
+      var p2 = p1.then((value) => {
+        console.log("succeed-2");
+        return new Promise(executor);
+      });
+
+      p2.catch((error) => {
+        console.log("error", error);
+      });
+      console.log(2);
+    </script>
+  </body>
+</html>

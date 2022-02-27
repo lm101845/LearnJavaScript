@@ -1,0 +1,38 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-15 09:34:01
+ * @LastEditTime: 2022-02-15 09:34:04
+ * @FilePath: \08-JS高程\01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let p1 = Promise.resolve();
+        p1.then(() => console.log('p1.then() onResolved'));
+        console.log('p1.then() returns');
+
+        let p2 = Promise.reject();
+        p2.then(null, () => console.log('p2.then() onRejected'));
+        console.log('p2.then() returns');
+
+        let p3 = Promise.reject();
+        p3.catch(() => console.log('p3.catch() onRejected'));
+        console.log('p3.catch() returns');
+
+        let p4 = Promise.resolve();
+        p4.finally(() => console.log('p4.finally() onFinally'));
+        console.log('p4.finally() returns');
+        
+    </script>
+</body>
+
+</html>

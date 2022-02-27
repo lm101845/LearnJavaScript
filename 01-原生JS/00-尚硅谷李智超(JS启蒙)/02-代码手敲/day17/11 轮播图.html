@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:  0;
+			padding: 0;
+		}
+
+		/*
+		 *设置outer的样式 
+		 */
+		#outer{
+			width: 520px;
+			height: 333px;
+			margin: 50px auto;
+			background-color: greenyellow;
+			padding: 10px 0;
+			position: relative;
+			/*裁剪溢出的内容*/
+			overflow: hidden;
+		}
+
+		#imgList{
+			/*去除项目符号*/
+			list-style: none;
+			/*设置ul的宽度*/
+			/*width: 2600px;*/
+			/*开启绝对定位*/
+			position: absolute;
+			/*设置偏移量*/
+			/*每向左移动520个像素，就会显示到下一张图片*/
+			left :0px;
+		}
+
+		/*设置图片中的li*/
+		#imgList li{
+			/*设置浮动*/
+			float: left;
+			/*设置左右外边距*/
+			margin: 0 10px;
+		}
+		/*设置导航按钮*/
+		#navDiv{
+			/*开启绝对定位*/
+			position: absolute;
+			/*设置位置*/
+			bottom: 15px;
+			/*设置left的值
+			 *outer宽度520
+			 *navDiv宽度25*5=125
+			 *520-125=395/2=197.5
+			 */
+		/*left: 197px;   但是这样就写死了*/
+		}
+
+		#navDiv a{
+			display: block;
+			width: 15px;
+			height: 15px;
+			background-color: red;
+			/*设置超链接浮动*/
+			float: left;
+			/*设置左右外边距*/
+			margin: 0 5px;
+			/*设置透明*/
+			opacity: 0.5;
+			/*兼容IE8透明*/
+			filter: alpha(opacity = 50);
+		}
+
+		/*设置鼠标移入的效果*/
+		#navDiv a:hover{
+			background-color: black;
+		}
+	</style>
+
+	<!-- 引入工具 -->
+	<script src="js/tools.js"></script>
+	<script>
+		window.onload = function(){
+			
+			//获取imgList
+			var imgList = document.getElementById("imgList");
+
+			//获取页面中所有的img标签
+			var imgArr = document.getElementsByTagName("img");
+
+			//设置imgList的宽度
+			imgList.style.width = 520*imgArr.length + "px";
+
+			// 设置导航按钮居中
+			
+			//获取navDiv
+			var navDiv = document.getElementById("navDiv");
+
+			//获取outer
+			var outer = document.getElementById("outer");
+
+			//设置navDiv的left的值
+			navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+
+			//默认显示图片的索引
+			var index = 0;
+
+			//获取所有的a
+			var allA = document.getElementsByTagName("a");
+
+			//设置默认选中的效果
+			allA[index].style.backgroundColor = "black";
+
+			/**
+			 * 点击超链接切换到指定图片
+			 * 		点击第一个超链接，显示第一个图片
+			 * 		点击第二个超链接，显示第二个图片...
+			 */
+			
+			//为所有的超链接绑定一个单击响应函数
+			for(var i = 0; i < allA.length; i++){
+
+				//为每一个超链接都添加一个number属性
+				allA[i].num = i;
+
+				//为超链接绑定一个单击响应函数
+				allA[i].onclick = function(){
+
+					//获取点击超链接的索引,并将其设置为index
+					index = this.num;
+					//alert(this.num);
+					
+					//切换图片
+					/**
+					 * 第一张 索引0 left 0
+					 * 第二张 索引1 left-520
+					 * 第三张 索引2 left -1040
+					 */
+					
+					//imgList.style.left = -520*index + "px";
+					//设置选中的a
+
+					//修改正在选中的a
+					//allA[index].style.backgroundColor = "black"; 不行
+					
+					setA();
+					//使用move()函数切换
+					move(imgList , "left" , -520*index , 20 , function(){
+
+					});
+				};
+			}
+
+			//创建要给方法，用来设置选中的a
+			function setA(){
+
+				//遍历所有的a,并将他们的背景颜色设置为红色
+				for(var i = 0 ; i < allA.length; i++){
+					allA[i].style.backgroundColor = "";
+				}
+
+				//将选中的a设置为黑色
+				allA[index].style.backgroundColor = "black"; 
+			}
+		};
+	</script>
+</head>
+<body>
+	<!-- 创建一个外部的div，来作为一个大的容器-->
+	<div id="outer">
+		<!-- 创建一个ul,用于放置图片 -->
+		<ul id="imgList">
+			<li><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/5.jpg" alt=""></li>
+		</ul>
+
+		<!-- 创建导航按钮 -->
+		<div id="navDiv">
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+		</div>
+	</div>
+</body>
+</html>

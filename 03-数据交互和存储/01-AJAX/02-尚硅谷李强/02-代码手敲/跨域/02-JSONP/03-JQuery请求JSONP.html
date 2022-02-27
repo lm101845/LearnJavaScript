@@ -1,0 +1,42 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-28 17:24:05
+ * @LastEditTime: 2021-07-28 17:38:34
+ * @FilePath: \02-尚硅谷李强\02-代码手敲\跨域\02-JSONP\03-JQuery请求JSONP.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #result {
+        width: 300px;
+        height: 100px;
+        border: 1px solid #78e;
+      }
+    </style>
+  </head>
+  <body>
+      <button>点击发送jsonp请求</button>
+        <br>
+        <br>
+        <br>
+      <div id="result"></div>
+      <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+      <script>
+          $('button').eq(0).click(function(){
+              $.getJSON('http://localhost:8000/jquery-jsonp-server?callback=?',function(data){
+                //   console.log(data);
+                $('#result').html(`
+                    名称：${data.name}<br />,
+                    校区：${data.city}
+                `)
+              })
+            //后面的?callback=?是一个固定写法
+          })
+      </script>
+  </body>
+</html>

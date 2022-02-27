@@ -1,0 +1,1 @@
+Airbnb风格指南：https://github.com/airbnb/javascript

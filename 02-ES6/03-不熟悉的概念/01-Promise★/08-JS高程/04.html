@@ -1,0 +1,22 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-15 09:34:01
+ * @LastEditTime: 2022-02-15 09:34:04
+ * @FilePath: \08-JS高程\01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => setTimeout(resolve, 2000));
+        // 在 console.log 打印期约实例的时候，还不会执行超时回调（即 resolve()）
+        setTimeout(console.log, 0, p); // Promise <pending>
+    </script>
+</body>
+</html>

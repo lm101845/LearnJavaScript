@@ -1,0 +1,26 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-15 09:34:01
+ * @LastEditTime: 2022-02-15 09:34:04
+ * @FilePath: \08-JS高程\01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => resolve('foo'));
+        p1.then((value) => console.log(value)); // foo
+        let p2 = new Promise((resolve, reject) => reject('bar'));
+        p2.catch((reason) => console.log(reason)); // bar
+    </script>
+</body>
+
+</html>

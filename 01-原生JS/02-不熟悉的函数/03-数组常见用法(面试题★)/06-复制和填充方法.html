@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			/**
+			         * ES6 新增了两个方法：批量复制方法 copyWithin() ，以及填充数组方法 fill() 。这两个方法的
+			函数签名类似，都需要指定既有数组实例上的一个范围，包含开始索引，不包含结束索引。使用这个方
+			法不会改变数组的大小。
+			使用 fill() 方法可以向一个已有的数组中插入全部或部分相同的值。开始索引用于指定开始填充
+			的位置，它是可选的。如果不提供结束索引，则一直填充到数组末尾。负值索引从数组末尾开始计算。
+			也可以将负索引想象成数组长度加上它得到的一个正索引：
+			         *
+			         *
+			        */
+
+			const zeroes = [0, 0, 0, 0, 0]
+			// 用 5 填充整个数组
+			zeroes.fill(5)
+			console.log(zeroes)
+			// (5) [5, 5, 5, 5, 5]
+
+			zeroes.fill(0) //重置
+			// 不能写这行代码，写了上面的也会变成0？
+			// 为什么呢？代码不是从上往下执行的吗？
+			// 我去，又好了，上面是5，下面是0了
+			console.log(zeroes)
+
+			// 用 6 填充索引大于等于 3 的元素
+			zeroes.fill(6, 3)
+			console.log(zeroes) // [0, 0, 0, 6, 6]
+			zeroes.fill(0) // 重置
+
+			// 用 7 填充索引大于等于 1 且小于 3 的元素
+			zeroes.fill(7, 1, 3)
+			console.log(zeroes) // [0, 7, 7, 0, 0];
+			zeroes.fill(0) // 重置
+
+			// 用 8 填充索引大于等于 1 且小于 4 的元素
+			// (-4 + zeroes.length = 1)
+			// (-1 + zeroes.length = 4)
+
+			zeroes.fill(8, -4, -1)
+			console.log(zeroes) // [0, 8, 8, 8, 0];
+
+			// fill() 静默忽略超出数组边界、零长度及方向相反的索引范围：
+			const zeroes1 = [0, 0, 0, 0, 0]
+			// 索引过低，忽略
+			zeroes1.fill(1, -10, -6)
+			console.log(zeroes1) // [0, 0, 0, 0, 0]
+			// 索引过高，忽略
+			zeroes1.fill(1, 10, 15)
+			console.log(zeroes1) // [0, 0, 0, 0, 0]
+			// 索引反向，忽略
+			zeroes1.fill(2, 4, 2)
+			console.log(zeroes1) // [0, 0, 0, 0, 0]
+			// 索引部分可用，填充可用部分
+			zeroes1.fill(4, 3, 10)
+			console.log(zeroes1) // [0, 0, 0, 4, 4]
+
+
+			//与 fill() 不同， copyWithin() 会按照指定范围浅复制数组中的部分内容，
+			// 然后将它们插入到指定索引开始的位置。开始索引和结束索引则与fill()使用同样的计算方法：
+			let ints,
+				reset = () => (ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+			reset()
+
+			// console.log(reset());
+			console.log(ints)
+			// 从 ints 中复制索引 0 开始的内容，插入到索引 5 开始的位置
+			// 在源索引或目标索引到达数组边界时停止
+			ints.copyWithin(5)
+			console.log(ints) // [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
+			reset()
+
+			// 从 ints 中复制索引 5 开始的内容，插入到索引 0 开始的位置
+			ints.copyWithin(0, 5)
+			console.log(ints) // [5, 6, 7, 8, 9, 5, 6, 7, 8, 9]
+			reset()
+
+			// 从 ints 中复制索引 0 开始到索引 3 结束(不包括3)的内容
+			// 插入到索引 4 开始的位置
+			ints.copyWithin(4, 0, 3)
+			console.log(ints) // [0, 1, 2, 3, 0, 1, 2, 7, 8, 9]
+			reset()
+
+			// JavaScript 引擎在插值前会完整复制范围内的值
+			// 因此复制期间不存在重写的风险
+			ints.copyWithin(2, 0, 6)
+			console.log(ints) // [0, 1, 0, 1, 2, 3, 4, 5, 8, 9]
+			reset()
+
+			// 支持负索引值，与 fill()相对于数组末尾计算正向索引的过程是一样的
+			ints.copyWithin(-4, -7, -3)
+            console.log(ints) // [0, 1, 2, 3, 4, 5, 3, 4, 5, 6]
+			// copyWithin()静默忽略超出数组边界、零长度及方向相反的索引范围：
+
+			let ints1,
+				reset1 = () => (ints1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+			reset1()
+			// 索引过低，忽略
+			ints.copyWithin(1, -15, -12)
+			console.log(ints1) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+			reset1()
+			// 索引过高，忽略
+			ints1.copyWithin(1, 12, 15)
+			console.log(ints1) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+			reset1()
+			// 索引反向，忽略
+			ints1.copyWithin(2, 4, 2)
+			console.log(ints1) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+			reset1()
+			// 索引部分可用，复制、填充可用部分
+			ints1.copyWithin(4, 7, 10)
+			console.log(ints1) // [0, 1, 2, 3, 7, 8, 9, 7, 8, 9];
+		</script>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-31 14:01:10
+ * @LastEditTime: 2021-07-31 15:02:26
+ * @FilePath: \第11章-期约与异步函数\11.2-期约\11.2.2-期约基础\04-Promise.resolve().html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 期约并非一开始就必须处于待定状态，然后通过执行器函数才能转换为落定状态。通过调用
+      // Promise.resolve() 静态方法，可以实例化一个解决的期约。下面两个期约实例实际上是一样的：
+      let p1 = new Promise((resolve, reject) => resolve());
+      console.log(p1);
+
+      let p2 = Promise.resolve()
+      console.log(p2);
+
+      console.log(p1 === p2);  //false
+    </script>
+  </body>
+</html>

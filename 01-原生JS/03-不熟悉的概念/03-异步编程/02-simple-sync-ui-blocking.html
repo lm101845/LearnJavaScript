@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid rgb(0, 0, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Concepts -->
+    <!--我们模拟一个在现实的网页可能遇到的情况：因为渲染UI而阻塞用户的互动，这个例子有2个按钮:  -->
+    <!-- "Fill canvas" : 点击的时候用1百万个蓝色的圆填满整个<canvas> .
+"Click me for alert" ：点击显示alert 消息. -->
+<!-- 如果你点击第一个按钮，然后快速点击第二个，会注意到alert消息并没有出现，只有等到圆圈都画完以后，才会出现：因为第一个操作没有完成之前阻塞了第二个操作的运行. -->
+<!-- 当然，这个例子也很丑陋，因为我们只是在模拟阻塞效果。但在现实中，这是一个很常见的问题。开发人员们一直在努力缓解它。 -->
+<!-- 为什么是这样? 答案是：JavaScript一般来说是单线程的（single threaded）。接着我们来介绍线程的概念。 -->
+
+<!-- 一个线程是一个基本的处理过程，程序用它来完成任务。每个线程一次只能执行一个任务: -->
+
+<!-- 每个任务顺序执行，只有前面的结束了，后面的才能开始。
+
+正如我们之前所说，现在的计算机大都有多个内核（core），因此可以同时执行多个任务。支持多线程的编程语言可以使用计算机的多个内核，同时完成多个任务: -->
+
+<!-- JavaScript 传统上是单线程的。即使有多个内核，也只能在单一线程上运行多个任务，此线程称为主线程（main thread）。我们上面的例子运行如下: 
+    Main thread: Render circles to canvas -> Display alert()
+-->
+    <p>
+        <button class="fill">fill canvas</button>
+        <button class="alert">Click me for alert</button>
+    </p>
+    <script>
+        const canvas = document.createElement('canvas');
+        canvas.width = 640;
+        canvas.height = 480;
+        document.body.appendChild(canvas);
+        let ctx = canvas.getContext('2d');
+
+        let alertBtn = document.querySelector('.alert');
+        let fillBtn = document.querySelector('.fill');
+
+        function degToRad(degrees) {
+            return degrees * Math.PI / 180
+        }
+
+        function random(min, max) {
+            var num = Math.floor(Math.random() * (max - min)) + min;
+            return num;
+        }
+
+        function expensiveOperation() {
+            for (let i = 0; i < 1000000; i++) {
+                ctx.fillStyle = 'rgba(0,0,255, 0.2)';
+                ctx.beginPath();
+                ctx.arc(random(0,
+                    canvas.width), random(0, canvas.height), 10, degToRad(0), degToRad(360), false);
+                ctx.fill()
+            }
+        }
+
+        fillBtn.addEventListener('click', expensiveOperation);
+
+        alertBtn.addEventListener('click', () =>
+            alert('You clicked me!')
+        );
+    </script>
+</body>
+
+</html>
