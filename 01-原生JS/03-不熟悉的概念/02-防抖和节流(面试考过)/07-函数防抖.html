@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    没有防抖的input<input type="text" id="unDebounce">
+    <hr>
+    有防抖的input<input type="text" id="debounce">
+    <script>
+        // 在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。
+        //模拟一段ajax请求
+
+        function ajax(content) {
+            console.log('无防抖',content)
+        }
+
+        let input1 = document.getElementById('unDebounce')
+
+        input1.addEventListener('keyup', function (e) {
+            ajax(e.target.value)
+        })
+
+
+        function ajax2(content){
+            console.log('有防抖',content);
+        }
+
+        function debounce(fun,delay){
+            return function(args){
+                console.log('外面this的值',this);
+                let that = this;
+                let _args = args;
+                clearTimeout(fun.id)
+                fun.id = setTimeout(function(){
+                    console.log('函数里面this的值',this);
+                    console.log('函数里面that的值',that);
+                    fun.call(that,_args)
+                },delay);
+            }
+        }
+
+        let input2 = document.getElementById('debounce');
+        let debounceAjax = debounce(ajax2, 2000)
+
+        input2.addEventListener('keyup',function(e){
+            //一监听键盘抬起就触发debounceAjax函数
+            console.log('函数触发了');
+            debounceAjax(e.target.value)
+        })
+    </script>
+</body>
+
+</html>
