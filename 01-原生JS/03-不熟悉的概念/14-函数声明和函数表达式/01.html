@@ -1,0 +1,38 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-02 16:40:12
+ * @LastEditTime: 2022-03-02 16:40:13
+ * @FilePath: \14-函数声明和函数表达式\01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function ask(question, yes, no) {
+            if (confirm(question)) yes()
+            else no();
+        }
+
+        function showOk() {
+            alert("You agreed.");
+        }
+
+        function showCancel() {
+            alert("You canceled the execution.");
+        }
+
+        // 用法：函数 showOk 和 showCancel 被作为参数传入到 ask
+        ask("Do you agree?", showOk, showCancel);
+
+    </script>
+</body>
+
+</html>

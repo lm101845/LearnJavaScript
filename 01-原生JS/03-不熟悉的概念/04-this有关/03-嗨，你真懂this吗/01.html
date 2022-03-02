@@ -1,0 +1,46 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-02 15:46:48
+ * @LastEditTime: 2022-03-02 15:46:50
+ * @FilePath: \03-嗨，你真懂this吗\01.html
+-->
+
+<!-- this 就是一个指针，指向调用函数的对象 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var number = 5;
+        var obj = {
+            number: 3,
+            fn1: (function () {
+                var number;
+                this.number *= 2;
+                number = number * 2;
+                number = 3;
+                return function () {
+                    var num = this.number;
+                    this.number *= 2;
+                    console.log(num);
+                    number *= 3;
+                    console.log(number);
+                }
+            })()
+        }
+        var fn1 = obj.fn1;
+        fn1.call(null);  //10 30
+        obj.fn1();  //6 18
+        console.log(window.number);  //5
+
+    </script>
+</body>
+
+</html>

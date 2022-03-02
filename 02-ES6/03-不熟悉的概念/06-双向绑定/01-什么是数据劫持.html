@@ -1,0 +1,59 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-02 17:24:50
+ * @LastEditTime: 2022-03-02 17:24:52
+ * @FilePath: \06-双向绑定\01-什么是数据劫持.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 这是将要被劫持的对象
+        const data = {
+            name: '',
+        };
+
+        function say(name) {
+            if (name === '古天乐') {
+                console.log('给大家推荐一款超好玩的游戏');
+            } else if (name === '渣渣辉') {
+                console.log('戏我演过很多,可游戏我只玩贪玩懒月');
+            } else {
+                console.log('来做我的兄弟');
+            }
+        }
+
+        // 遍历对象,对其属性值进行劫持
+        Object.keys(data).forEach(function (key) {
+            // 要获得对象上所有可枚举的实例属性，可以使用 Object.keys() 方法。
+            //这个方法接收一个对象作为参数，返回包含该对象所有可枚举属性名称的字符串数组
+            Object.defineProperty(data, key, {
+                enumerable: true,
+                configurable: true,
+                get: function () {
+                    console.log('get');
+                },
+                set: function (newVal) {
+                    // 当属性值发生变化时我们可以进行额外操作
+                    console.log(`大家好,我系${newVal}`);
+                    say(newVal);
+                },
+            });
+        });
+
+        data.name = '渣渣辉';
+//大家好,我系渣渣辉
+//戏我演过很多,可游戏我只玩贪玩懒月
+
+    </script>
+</body>
+
+</html>
