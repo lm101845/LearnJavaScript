@@ -24,3 +24,4 @@ let key: keyof Obj
 let value: Obj['a']
 
 // T extends U
+export default {}
