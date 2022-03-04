@@ -61,3 +61,5 @@ let e3: E.a = 3
 
 let g1: G = G.a
 let g2: G.a = G.a
+
+export default {}
