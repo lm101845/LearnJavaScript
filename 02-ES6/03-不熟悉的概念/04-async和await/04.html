@@ -24,6 +24,8 @@
         //这是错误的做法，并且判定resolve，返回值为undefined,并且Uncaught报错
         // async function PromiseError() {
         //     Promise.reject('这是错误的做法');
+        //     return undefined;
+        //     //默认会给你加上这一句
         // }
 
         PromiseError().then(success => console.log('成功', success))

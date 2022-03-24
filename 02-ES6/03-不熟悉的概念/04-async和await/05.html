@@ -16,8 +16,21 @@
 
 <body>
     <script>
+        /**
+         * 还有一点，在async里，必须要将结果return回来，\
+         * 不然的话不管是执行reject还是resolved的值都为undefine，建议使用箭头函数。
+         * 
+         * await意思是async wait(异步等待)。这个关键字只能在使用async定义的函数里面
+         * 使用。任何async函数都会默认返回promise，并且这个promise解析的值都将会是这
+         * 个函数的返回值，而async函数必须等到内部所有的 await 命令的 Promise 
+         * 对象执行完，才会发生状态改变。
+           打个比方，await是学生，async是校车，必须等人齐了再开车。
+
+           在这个函数里，有一个await函数，async会等到await 1 
+           这一步执行完了才会返回promise状态，毫无疑问，判定resolved。
+        */
         async function awaitReturn() {
-        return await 1
+            return await 1
         };
         awaitReturn().then(success => console.log('成功', success))
         .catch(error => console.log('失败',error))

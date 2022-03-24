@@ -31,8 +31,13 @@
         }
 
         async function fn() {
+            console.log('1')
             await timeoutFn(1000);
+            // let a = await timeoutFn(1000);
+            // console.log(a)
+            console.log('2')
             await timeoutFn(2000);
+            console.log('3')
             return '完成';  //等了3秒
 
             /**

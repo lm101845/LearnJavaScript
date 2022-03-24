@@ -1,0 +1,42 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-10 09:22:56
+ * @LastEditTime: 2022-02-10 09:22:56
+ * @FilePath: \04-async和await\0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function throwStatus() {
+            // return '可以返回所有类型的值'
+            console.log('可以返回所有类型的值')
+            await test();
+            //test函数会执行，然后它过河拆桥，后面的函数就执行不了了
+            console.log('打印了')
+        }
+
+        function test() {
+            console.log('test函数执行了')
+        }
+
+        throwStatus().then(success => console.log('成功', success))
+            .catch(error => console.log('失败', error));
+
+        console.log('肯定第一个打印')
+//打印结果
+
+//成功 可以返回所有类型的值
+
+    </script>
+</body>
+
+</html>

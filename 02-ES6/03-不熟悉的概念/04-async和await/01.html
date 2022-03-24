@@ -12,6 +12,16 @@
     <script>
         async function asyncFn() {
             return 'hello world';
+            // console.log('没有写返回值，默认返回undefined')
+            /**
+             * 所以，async 函数返回的是一个 Promise 对象。从文档中也可以得到这个信息。
+             * async 函数（包含函数语句、函数表达式、Lambda表达式）会返回一个 Promise 对象。
+             * 如果在函数中 return 
+             * 一个直接量，async 会把这个直接量通过 Promise.resolve() 封装成 Promise 对象。
+             * 
+             * Promise.resolve(x) 可以看作是 new Promise(resolve => resolve(x)) 的简写，
+             * 可以用于快速封装字面量对象或其他对象，将其封装成 Promise 实例。
+            */
         }
         console.log(asyncFn());
     </script>

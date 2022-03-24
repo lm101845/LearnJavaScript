@@ -1,0 +1,36 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-10 09:22:56
+ * @LastEditTime: 2022-02-10 09:22:56
+ * @FilePath: \04-async和await\0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function testAsync() {
+            return "hello async";
+        }
+        /**
+         * async 函数返回的是一个 Promise 对象，所以在最外层不能用 await 获取其返回值的情况下，
+         * 我们当然应该用原来的方式：then() 链来处理这个 Promise 对象，就像这样
+         * 
+         * 联想一下 Promise 的特点——无等待，所以在没有 await 的情况下执行 async 函数，它会立即执行，返回一个 Promise 对象，
+         * 并且，绝不会阻塞后面的语句。这和普通返回 Promise 对象的函数并无二致。
+        */
+        testAsync().then(v => {
+            console.log(v);    // 输出 hello async
+        });
+        console.log('async在没有await的情况下，会成为异步函数')
+    </script>
+</body>
+
+</html>

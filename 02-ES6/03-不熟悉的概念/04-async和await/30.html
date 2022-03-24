@@ -1,0 +1,49 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-10 09:22:56
+ * @LastEditTime: 2022-03-24 10:10:23
+ * @FilePath: \03-不熟悉的概念\04-async和await\30.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 一般来说，都认为 await 是在等待一个 async 函数完成。
+         * 不过按语法说明，await 等待的是一个表达式，这个表达式的计算结果是
+         *  Promise 对象或者其它值（换句话说，就是没有特殊限定）。
+ 
+            因为 async 函数返回一个 Promise 对象，所以 await 可以用于等待一个 
+            async 函数的返回值——这也可以说是 await 在等 async 函数，但要清楚，
+            它等的实际是一个返回值。注意到 await 不仅仅用于等 Promise 对象，
+            它可以等任意表达式的结果，所以，await 后面实际是可以接【普通函数——如getSomething】调用或者直接量的。
+            所以下面这个示例完全可以正确运行
+        */
+        function getSomething() {
+            return "something";
+        }
+
+        async function testAsync() {
+            return Promise.resolve("hello async");
+        }
+
+        async function test() {
+            const v1 = await getSomething();  //getSomething前面没有async
+            const v2 = await testAsync();
+            console.log(v1, v2);
+        }
+
+        test();
+        console.log('哈哈')
+    </script>
+</body>
+
+</html>

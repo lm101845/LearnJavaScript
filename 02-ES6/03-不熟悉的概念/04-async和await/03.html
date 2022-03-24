@@ -16,11 +16,16 @@
 
 <body>
     <script>
+        /**
+         * async定义的函数内部会默认返回一个promise对象，
+         * 如果函数内部抛出异常或者是返回reject，都会使函数的promise状态为失败reject。
+        */
         async function e() {
             throw new Error('has Error');
         }
         e().then(success => console.log('成功', success))
             .catch(error => console.log('失败', error));
+        console.log('打印了')
     </script>
 </body>
 

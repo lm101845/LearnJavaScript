@@ -22,30 +22,30 @@
         }
 
         async function testAsync() {
-            console.log("testAsync");
-            return Promise.resolve("hello async");
+            console.log("testAsync");  //6
+            return Promise.resolve("hello async");  
         }
 
         async function test() {
             console.log("test start..."); //1
             const testFn1 = await testSometing();
-            console.log(testFn1);
+            console.log(testFn1);  //5
 
             const testFn2 = await testAsync();
-            console.log(testFn2);
+            console.log(testFn2);  //8
 
-            console.log('test end...');
+            console.log('test end...');  //9
         }
 
         test();
 
         var promiseFn = new Promise((resolve) => {
-            console.log("promise START...");
+            console.log("promise START...");  //3
             resolve("promise RESOLVE");
         });
-        promiseFn.then((val) => console.log(val));
+        promiseFn.then((val) => console.log(val));  //7
 
-        console.log("===END===")
+        console.log("===END===")  //4
     </script>
 </body>
 

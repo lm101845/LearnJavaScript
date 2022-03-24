@@ -17,7 +17,7 @@
 <body>
     <script>
         function testSometing() {
-            console.log("testSomething"); //5
+            console.log("testSomething"); //2
             return "return testSomething";
         }
 
@@ -27,15 +27,19 @@
         }
 
         async function test() {
-            console.log("test start..."); //1-
+            console.log("test start..."); //1
 
             const testFn1 = await testSometing();
-            console.log(testFn1);
+            console.log(testFn1);  //5
 
             const testFn2 = await testAsync();
-            console.log(testFn2);
+            /**
+             * testAsync()执行完毕返回resolve，
+             * 之后await会让出线程就会去执行后面的，触发promiseFn打印出“promise START...”。
+            */
+            console.log(testFn2);  //8
 
-            console.log('test end...'); //2
+            console.log('test end...'); //9
         }
 
         test();

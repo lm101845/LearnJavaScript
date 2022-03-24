@@ -16,16 +16,17 @@
 
 <body>
     <script>
-        async function start2() {
-            console.log('START');
-            const time1 = 500;
-            const time2 = await first(time1);
-            const time3 = await second(time2);
-            const res = await third(time3);
-            console.log(`最后一次延迟${res}`);
-            console.log('END');
+        let last;
+        async function throwError() {
+            console.log(1)
+            await Promise.reject('error');
+            console.log(2)
+            last = await '没有执行';
+            console.log(3)
         }
-        start2();
+        throwError().then(success => console.log('成功', last))
+            .catch(error => console.log('失败', last))
+
     </script>
 </body>
 

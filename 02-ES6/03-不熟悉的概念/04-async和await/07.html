@@ -19,7 +19,7 @@
         function timeout(time) {
             return new Promise(function (resolve) {
                 return setTimeout(function () {
-                    return resolve(time + 200)
+                    return resolve(time + 1000)
                 }, time);
             })
         }
@@ -41,12 +41,12 @@
 
         // function start() {
         //     console.log('START');
-        //     const time1 = 500;
+        //     const time1 = 1000;
         //     first(time1).then(time2 => second(time2))
         //         .then(time3 => third(time3))
         //         .then(res => {
         //             console.log('最后一次延迟' + res);
-        //             console.timeEnd('END');
+        //             console.log('END');
         //         })
         // };
         // start();
@@ -54,11 +54,11 @@
         //使用async,await
         async function start2() {
             console.log('START');
-            const time1 = 500;
+            const time1 = 1000;
             const time2 = await first(time1);
             const time3 = await second(time2);
             const res = await third(time3);
-            console.log(`最后一次延迟${res}`);
+            console.log(`最后一次延迟${res}`);  
             console.log('END');
         }
         start2();
