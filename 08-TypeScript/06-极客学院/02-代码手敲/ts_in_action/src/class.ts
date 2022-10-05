@@ -4,8 +4,24 @@
  **/
 export default {}
 
-class Dog {
+abstract class Animal {
+    eat() {
+        console.log('eat')
+    }
+
+    abstract sleep(): void;
+
+    //抽象类中，也可以不指定方法的具体实现，这个就构成了一个抽象方法
+}
+
+// let animal = new Animal();
+// 无法创建抽象类的实例，抽象类只能被继承
+
+
+class Dog extends Animal {
+
     constructor(name: string) {
+        super();
         // private constructor(name:string) {
         // 这个类既不能被实例化，也不能被继承了
 
@@ -35,6 +51,11 @@ class Dog {
     //只读属性，一定要被初始化(实例属性一样要初始化，如this.name = name)
 
     static food: string = 'bones'
+
+    sleep() {
+        console.log('dog sleep')
+    }
+
     //类的静态成员，只能通过类名进行调用，而不能通过实例进行调用
 }
 
@@ -51,6 +72,9 @@ console.log(dog)
 
 //dog.pri()
 // dog.pro();
+
+dog.eat();
+dog.sleep();
 
 //类的继承
 class Husky extends Dog {
@@ -71,5 +95,41 @@ class Husky extends Dog {
 //类的成员修饰符(默认public)
 
 //类的静态成员可以被继承
-console.log(Husky.food,'类的静态成员可以被继承')
+console.log(Husky.food, '类的静态成员可以被继承')
+
+//抽象类中的多态
+class Cat extends Animal {
+    sleep() {
+        console.log('cat sleet')
+    }
+}
+
+let cat = new Cat();
+
+let animals: Animal[] = [dog, cat];
+animals.forEach(item=>{
+    item.sleep();
+})
+
+//类的this类型，实现链式调用
+class WorkFlow{
+    step1(){
+        return this;
+    }
+
+    step2(){
+        return this;
+    }
+}
+
+new WorkFlow().step1().step2();
+
+class MyFlow extends WorkFlow{
+    next(){
+        return this;
+    }
+}
+
+new MyFlow().next().step1().next().step2();
+//这个可以保证父类和子类之间接口调用的连贯性
 
