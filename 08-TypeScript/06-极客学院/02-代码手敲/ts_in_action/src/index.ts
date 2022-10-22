@@ -17,7 +17,13 @@
 // import './advanced2'
 // import './advanced3'
 // import './advanced4'
-import './advanced5'
-
+// import './advanced5'
+// import './es6/c'
+// import './01_module/node/c.node'
+// import './02_namespace/b.js'
+// import './03_merge/merge'
+// import './04_libs/index'
+// import './04_libs/global-lib'
+import './04_libs/index'
 let hello: string = "Hello TypeScript";
 document.querySelectorAll('.app')[0].innerHTML = hello
