@@ -24,6 +24,9 @@
 // import './03_merge/merge'
 // import './04_libs/index'
 // import './04_libs/global-lib'
-import './04_libs/index'
+// import './04_libs/index'
+// import './05_tsconfig/a'
+import a = require("./05_tsconfig/amd")
+// console.log([1,2,[3,4]].flat())
 let hello: string = "Hello TypeScript";
 document.querySelectorAll('.app')[0].innerHTML = hello

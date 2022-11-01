@@ -1,0 +1,11 @@
+{
+  "files": [
+    "a.ts"
+  ],
+  "include": [
+    "src/*/*"
+  ],
+  "exclude": [
+    "lib"
+  ]
+}

@@ -3,7 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     entry: {
-        'app': './src/index.ts'
+        'app': './src/index.tsx'
     },
     output: {
         filename: '[name].[chunkhash:8].js'
