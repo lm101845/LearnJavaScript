@@ -1,42 +1,23 @@
-// getEmployee
-export interface EmployeeRequest {
-    name?: string;
-    departmentId?: number;
+/**
+ * @Author liming
+ * @Date 2022/11/15 22:51
+ **/
+
+//请求
+export interface EmployeeRequest{
+    name:string;
+    departmentId: number | undefined;
 }
-export interface EmployeeInfo {
+
+//响应
+interface EmployeeInfo {
     id: number;
     key: number;
     name: string;
     department: string;
-    departmentId: number;
     hiredate: string;
     level: string;
-    levelId: number;
 }
+
 export type EmployeeResponse = EmployeeInfo[] | undefined
-
-// createEmployee
-export interface CreateRequest {
-    name: string;
-    departmentId: number;
-    hiredate: string;
-    levelId: number;
-}
-export interface CreateResponse {
-    id: number;
-    key: number;
-}
-
-// updateEmployee
-export interface UpdateRequest {
-    id: number;
-    name: string;
-    departmentId: number;
-    hiredate: string;
-    levelId: number;
-}
-
-// deleteEmployee
-export interface DeleteRequest {
-    id: number;
-}
+//导出的是一个类型

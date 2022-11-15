@@ -57,7 +57,7 @@ class Employee extends Component<{}, State> {
         return (
             <>
                 <QueryForm onDataChange={this.setEmployee} />
-                {/* {this.getTotal()} */}
+                 {this.getTotal()}
                 <Table columns={employeeColumns} dataSource={this.state.employee} className="table" />
             </>
         )

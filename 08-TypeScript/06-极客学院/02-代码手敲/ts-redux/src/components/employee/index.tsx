@@ -1,130 +1,75 @@
+/**
+ * @Author liming
+ * @Date 2022/11/15 22:48
+ **/
 import React, { Component } from 'react';
 import { Table, Button } from 'antd';
-
-import { bindActionCreators, Dispatch } from 'redux';
-import { connect } from 'react-redux';
-
 import './index.css';
-
-import QueryForm from './QueryForm';
-import InfoModal from './InfoModal';
-
-import getColunms from './colums';
-import { DOWNLOAD_EMPLOYEE_URL } from '../../constants/urls';
-import {
-    EmployeeInfo,
-    EmployeeRequest,
-    EmployeeResponse,
-    CreateRequest,
-    DeleteRequest,
-    UpdateRequest
-} from '../../interface/employee';
-import {
-    getEmployee,
-    createEmployee,
-    deleteEmployee,
-    updateEmployee
-} from '../../redux/employee';
-
-interface Props {
-    onGetEmployee(param: EmployeeRequest, callback: () => void): void;
-    onCreateEmployee(param: CreateRequest, callback: () => void): void;
-    onDeleteEmployee(param: DeleteRequest): void;
-    onUpdateEmployee(param: UpdateRequest, callback: () => void): void;
-    employeeList: EmployeeResponse;
+import QueryForm from "./QueryForm";
+import {employeeColumns} from "./colums";
+import {EmployeeResponse} from "../../interface/employee";
+//为employee组件定义一个状态(该状态使用接口进行声明)
+interface State{
+    employee:EmployeeResponse
+    //export type EmployeeResponse = EmployeeInfo[] | undefined
 }
 
-interface State {
-    loading: boolean;
-    showModal: boolean;
-    edit: boolean;
-    rowData: Partial<EmployeeInfo>;
-}
+export default class Employee extends Component<{},State> {
+    //初始化状态
+    //组件状态使用接口定义，这样是有好处的
+    state:State = {
+        employee:undefined
+    }
 
-class Employee extends Component<Props, State> {
-    state: State = {
-        loading: false,
-        showModal: false,
-        edit: false,
-        rowData: {}
+    getTotal = ()=>{
+        let total:number;
+        //创建类型保护区块
+        if(typeof this.state.employee !== 'undefined'){
+            total = this.state.employee.length
+        }else{
+            total = 0;
+        }
+        return <p>共有{total}名员工</p>
+        //employee可能不是数组，可能是undefined，这样使用length属性就可能有问题
+        //我们可以使用类型保护
     }
-    setLoading = (loading: boolean) => {
+
+    setEmployee = (employee:EmployeeResponse)=>{
+        //设置employee的状态
         this.setState({
-            loading
+            employee
         })
     }
-    hideModal = () => {
-        this.setState({
-            showModal: false,
-            rowData: {}
-        })
-    }
-    handleCreate = () => {
-        this.setState({
-            showModal: true,
-            edit: false,
-            rowData: {}
-        });
-    }
-    handleDelete = (param: DeleteRequest) => {
-        this.props.onDeleteEmployee(param)
-    }
-    handleUpdate = (record: EmployeeInfo) => {
-        this.setState({
-            showModal: true,
-            edit: true,
-            rowData: record
-        });
-    }
-    handleDownload = () => {
-        window.open(DOWNLOAD_EMPLOYEE_URL);
-    }
+
     render() {
-        const {
-            employeeList,
-            onGetEmployee,
-            onCreateEmployee,
-            onUpdateEmployee
-        } = this.props;
         return (
             <>
-                <QueryForm getData={onGetEmployee} setLoading={this.setLoading} />
-                <div className="toolbar">
-                    <Button type="primary" icon="plus" onClick={this.handleCreate}>添加新员工</Button>
-                    <Button type="primary" icon="download" onClick={this.handleDownload} className="right">导出</Button>
-                </div>
-                <InfoModal
-                    visible={this.state.showModal}
-                    edit={this.state.edit}
-                    rowData={this.state.rowData}
-                    hide={this.hideModal}
-                    createData={onCreateEmployee}
-                    updateData={onUpdateEmployee}
-                />
+                <QueryForm onDataChange={this.setEmployee}/>
+                {/*给QueryForm添加一个属性用于做回调*/}
+                {/*这里有报错，因为antd对Form组件进行了包装,官方也给了解决方案*/}
+
+                {/*<div className="toolbar">*/}
+                {/*    <Button type="primary" icon="plus" onClick={this.handleCreate}>添加新员工</Button>*/}
+                {/*    <Button type="primary" icon="download" onClick={this.handleDownload} className="right">导出</Button>*/}
+                {/*</div>*/}
+                {/*<InfoModal*/}
+                {/*    visible={this.state.showModal}*/}
+                {/*    edit={this.state.edit}*/}
+                {/*    rowData={this.state.rowData}*/}
+                {/*    hide={this.hideModal}*/}
+                {/*    createData={onCreateEmployee}*/}
+                {/*    updateData={onUpdateEmployee}*/}
+                {/*/>*/}
+                {this.getTotal()}
                 <Table
-                    columns={getColunms(this.handleUpdate, this.handleDelete)}
-                    dataSource={employeeList}
-                    loading={this.state.loading}
+                    columns={employeeColumns}
+                    //columns表示表单头
+                    dataSource={this.state.employee}
+                    //将表单数据绑定到employee组件的状态上
                     className="table"
-                    pagination={false}
                 />
             </>
         )
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    employeeList: state.employee.employeeList
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-    onGetEmployee: getEmployee,
-    onCreateEmployee: createEmployee,
-    onDeleteEmployee: deleteEmployee,
-    onUpdateEmployee: updateEmployee
-}, dispatch);
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Employee);

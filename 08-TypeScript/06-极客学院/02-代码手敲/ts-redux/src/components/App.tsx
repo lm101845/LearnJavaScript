@@ -1,3 +1,7 @@
+/**
+ * @Author liming
+ * @Date 2022/11/15 22:48
+ **/
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import { Layout, Menu, ConfigProvider } from 'antd';
@@ -13,6 +17,7 @@ const App = ({ match }: any) => {
   let defaultKey = match.url.replace('/', '') || 'employee';
   return <ConfigProvider locale={zh_CN}>
     <Layout>
+      {/*布局组件*/}
       <Header>
         <Menu
           theme="dark"

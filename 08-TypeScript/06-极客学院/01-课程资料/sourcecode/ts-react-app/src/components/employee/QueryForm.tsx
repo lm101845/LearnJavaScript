@@ -89,6 +89,7 @@ class QueryForm extends Component<Props, EmployeeRequest> {
         });
     }
     handleSubmit = () => {
+        console.log(this.state,'state')
         this.queryEmployee(this.state);
     }
     componentDidMount() {
@@ -96,6 +97,7 @@ class QueryForm extends Component<Props, EmployeeRequest> {
     }
     queryEmployee(param: EmployeeRequest) {
         get(GET_EMPLOYEE_URL, param).then(res => {
+            console.log(res,'resxxx')
             this.props.onDataChange(res.data);
         });
     }
