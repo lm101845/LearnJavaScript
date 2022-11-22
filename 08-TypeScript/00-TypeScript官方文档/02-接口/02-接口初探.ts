@@ -10,11 +10,11 @@ interface LabelledValue {
 
 function printLabel2(labelObj: LabelledValue):void {
   console.log(labelObj.label);
-  
+
 }
 
 let myObj2 = { size: 10, label: "Size 10 Object" };
-printLabel2(myObj2);
+printLabel2(myObj2);  //要求一个属性，实际两个属性，可以
 /**
  * LabelledValue接口就好比一个名字，用来描述上面例子里的要求。
  *  它代表了有一个label属性且类型为string的对象。
