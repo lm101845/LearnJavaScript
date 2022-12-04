@@ -1,0 +1,42 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-11-22 10:24:26
+ * @LastEditTime: 2022-11-22 10:25:01
+ * @FilePath: \04-Object.assign\复制一个对象.html
+-->
+<!DOCTYPE html>
+<html>
+ 
+
+<head>
+         
+    <meta charset="UTF-8">
+          <title>复制一个对象</title>
+     
+</head>
+ 
+
+<body>
+         
+    <script type="text/javascript">
+        const obj = {
+            a: 1,
+            eat: function () {
+                console.log('吃东西')
+            }
+        }
+        const copy = Object.assign({}, obj);
+        console.log(obj,'obj');
+        console.log(copy,'copy');
+        console.log(copy == obj);  //false
+        console.log(copy.a);//1
+        copy.eat();//吃东西
+        copy.a = 10;
+        // obj.a = 10;
+        console.log(copy.a);//10
+        console.log(obj.a);//1
+    </script>
+     
+</body>
+
+</html>
