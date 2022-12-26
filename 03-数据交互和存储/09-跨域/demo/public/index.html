@@ -1,0 +1,30 @@
+<!--
+ * @Author liming
+ * @Date 2022/12/26 14:48
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button onclick="testGet('http://localhost:8888/api/new')">请求跨域信息</button>
+<button onclick="testGet('/local/new')">请求本地信息</button>
+<div>返回信息：</div>
+<div id="res"></div>
+<script>
+
+  function testGet(path){
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET',path);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+      const res=(xhr.response)
+      document.querySelector('#res').innerHTML=res
+    }
+  }
+
+</script>
+</body>
+</html>

@@ -23,11 +23,17 @@
                 是使⽤了async修饰之后，这个函数运⾏时并没有直接返回1，⽽是返回了⼀个值为1的Promise对象。
             */
             return 1
+            //直接写返回1
+
+            // setTimeout(()=>{
+            //     return 1
+            // },2000)
+            //写在定时器里面，返回undefined
         }
         let res = test()
         console.log(res)
             // [[Prototype]]: Promise
-            // [[PromiseState]]: "fulfilled" 
+            // [[PromiseState]]: "fulfilled"
             // [[PromiseResult]]: 1
     </script>
 </body>

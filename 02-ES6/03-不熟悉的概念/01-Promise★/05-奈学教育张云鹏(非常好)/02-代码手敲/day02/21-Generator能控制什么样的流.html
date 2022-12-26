@@ -17,39 +17,42 @@
 <body>
     <script>
         /**
-         * 
+         *
          */
         function* test() {
             var a = yield 1
-            console.log(a)
+            console.log(a,'--a')
 
             var res = yield setTimeout(function() {
                     return 123
                 }, 1000)
                 // clearTimeout(可以传它的id，可以取消，所以没法解决这个问题)
-            console.log(res)
+            console.log(res,'--res')
 
             var res1 = yield new Promise(function(resolve) {
                 setTimeout(function() {
                     resolve(456)
                 }, 1000)
             })
-            console.log(res1)
+            console.log(res1,'--res1')
         }
 
         var generator = test()
-        console.log(generator)
+        console.log(generator,'--generator')
         var step1 = generator.next()
-        console.log(step1)
+        console.log(step1,'--step1')
+
         var step2 = generator.next()
-        console.log(step2)
+        console.log(step2,'--step2')
+
         var step3 = generator.next()
-        console.log(step3)
+        console.log(step3,'--step3')
+
         step3.value.then(function(res) {
-            console.log(res);
+            console.log(res,'--step3res');
         })
         var step4 = generator.next()
-        console.log(step4)
+        console.log(step4,'--step4')
     </script>
 </body>
 
