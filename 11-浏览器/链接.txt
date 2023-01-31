@@ -1,0 +1,5 @@
+国外大神博文文章《浏览器是怎么工作的》：
+http://taligarsiel.com/Projects/howbrowserswork1.htm
+
+有关中文翻译版：
+https://www.shuzhiduo.com/A/x9J2kqE56o/

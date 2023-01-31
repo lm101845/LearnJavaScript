@@ -1,0 +1,2 @@
+https://blog.csdn.net/u013565133/article/details/70853214
+——理解 JavaScript 中的 Array.prototype.slice.apply(arguments)
