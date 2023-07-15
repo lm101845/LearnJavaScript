@@ -1,3 +1,5 @@
+export default {}
+
 interface Circle {
   kind: 'circle'
   radius: number

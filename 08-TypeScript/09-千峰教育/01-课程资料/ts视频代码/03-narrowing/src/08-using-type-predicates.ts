@@ -1,4 +1,4 @@
-/* type Fish = {
+type Fish = {
   name: string
   swim: () => void
 }
@@ -48,4 +48,4 @@ const underWater3: Fish[] = zoo.filter((pet): pet is Fish => {
     return false
   }
   return isFish(pet)
-}) */
+})

@@ -1,4 +1,4 @@
-/* function logValue(x: Date | string) {
+function logValue(x: Date | string) {
   if (x instanceof Date) {
     console.log(x.toUTCString())
   } else {
@@ -7,4 +7,4 @@
 }
 
 logValue(new Date())
-logValue('hello ts') */
+logValue('hello ts')
