@@ -20,6 +20,8 @@ top: true
 
 (注7：现在是2021年1月15日，我现在慢慢的开始重视起掘金这个软件了，以前都是网上搜索知识点，搜到哪看到哪，遇到掘金上的文章也就随手扫一眼，后知后觉的我现在有了新的体会，前端的基础知识大体也就这么些，而掘金上有那么多写前端的作者，反反复复，翻来覆去的，用各种角度来解读这些知识点。那么，如果我每天都能认真看3,5篇文章，就算蠢钝如我，看了这么多从各个角度解读同一个知识点的文章，你再笨也能学会吧，遇到特别好的文章就摘抄下来，加深印象。到时候再跟着多敲敲示例代码体验一下，那就基本上前端基础知识估计就掌握的差不多了。希望我有一天可以在掘金上能够认真看完1000篇文章啊。)
 
+(注8：现在是2023年9月3日，时间过得好快啊，这些概念对我来说也比较熟悉了。所以说时间是一切的催化剂啊。)
+
 # 概念1：对象（一个个鲜活的实体）
 
 ## 数据类型
@@ -179,8 +181,8 @@ JavaScript 内部会执行如下几个动作：
 
 ~~~javascript
 var f = new F();
-alert(f.constructor === F);//true
-alert(f.constructor === F.prototype.constructor);//true
+console.log(f.constructor === F);//true
+console.log(f.constructor === F.prototype.constructor);//true
 ~~~
 
 我们可以利用这个特性来完成下面的事情：
@@ -409,6 +411,59 @@ console.log(B.ary2); 	//(2)[1,2]
 **最后总结下什么是原型链：**
 
 所有的对象都有一个`__proto__`属性，我们通过对象的`__proto__`属性一层层的向上访问，最终会得到值null；那么我们访问的整个路径就是这个对象的原型链。
+
+### prototype与constructor对比
+
+在JavaScript中，`prototype`和`constructor`是两个非常重要的属性，它们在对象和类的创建和操作中起着重要的作用。下面是关于这两个属性的详细解释和区别：
+
+1. **`constructor`**
+
+`constructor`是一个内置属性，每个JavaScript对象都自动拥有这个属性。它是一个构造函数，即一个用于创建和初始化对象的函数。构造函数通常用于为新对象设置初始状态，并定义其方法和属性。
+
+例如：
+
+
+```javascript
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+}
+
+let myCar = new Car('Toyota', 'Corolla', 2005);
+
+console.log(myCar.constructor); // function Car(make, model, year) {
+                                 //   this.make = make;
+                                 //   this.model = model;
+                                 //   this.year = year;
+                                 // }
+```
+2. **`prototype`**
+
+`prototype`是一个特殊的属性，它提供了访问对象实例的“原型”。每个JavaScript对象都链接到一个原型对象，该原型对象定义了该类型的所有实例的默认属性和方法。当我们访问一个对象的属性时，如果该对象本身没有这个属性，那么JavaScript会试图从它的原型对象中查找这个属性。
+
+例如：
+
+
+```javascript
+function Car() {
+}
+
+Car.prototype.make = 'Toyota';
+Car.prototype.year = 2005;
+
+let myCar = new Car();
+
+console.log(myCar.constructor); // function Car() {}
+console.log(myCar.prototype); // undefined (because myCar is not a function)
+console.log(myCar.__proto__); // { make: 'Toyota', year: 2005 } (because __proto__ is an internal property)
+```
+注意，我们不能直接访问`prototype`属性，因为它是内部属性，而是通过`__proto__`（非标准）或`Object.getPrototypeOf()`方法间接访问的。
+
+总结一下，`constructor`和`prototype`的主要区别是：
+
+* `constructor`是一个内置属性，它引用的是创建当前对象的函数。而`prototype`是一个特殊的属性，它提供了访问对象实例的“原型”。
+* `constructor`主要用于创建和初始化对象，而`prototype`主要用于共享属性和方法。
 
 # 概念2：构造函数与函数
 
@@ -2906,3 +2961,74 @@ process.nextTick(function foo() {
 
 [视频链接](https://www.bilibili.com/video/BV1Uk4y1R7cP?from=search&seid=2055613987226705839)
 
+# 概念19：for of和for in
+
+## JS中对象可以用for of进行循环吗
+
+在JavaScript中，`for...of`循环是用于遍历可迭代对象（iterable objects）的，比如数组（Array）、字符串（String）、Map、Set等。然而，普通的对象（Object）并不是可迭代的，所以不能直接使用`for...of`循环来遍历对象的属性。
+
+如果你想遍历对象的属性，可以使用`for...in`循环或者`Object.keys()`方法配合`for...of`循环。
+
+1. 使用`for...in`循环：
+
+
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+
+for (let key in obj) {
+  console.log(key, obj[key]);
+}
+```
+2. 使用`Object.keys()`方法配合`for...of`循环：
+
+
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+
+for (let key of Object.keys(obj)) {
+  console.log(key, obj[key]);
+}
+```
+在上述代码中，`key`是对象的属性名，`obj[key]`是对应的属性值。这样你可以遍历对象的所有属性并进行相应的操作。
+
+![](学习JavaScript遇到的瓶颈之概念/51.png)
+
+## for in 和for of区别
+
+在JavaScript中，`for...in`和`for...of`循环是两种不同的循环结构，它们用于遍历对象的属性或数组的元素。
+
+`for...in`循环用于遍历对象的可枚举属性。它可以遍历对象自身以及原型链上的属性。这种循环结构在遍历数组时不太常用，因为它也会遍历数组原型链上的属性，可能会得到一些预期之外的结果。
+
+
+```javascript
+let obj = {a: 1, b: 2, c: 3};
+for (let prop in obj) {
+  console.log(`obj.${prop} = ${obj[prop]}`);
+}
+```
+上述代码会输出：
+
+
+```
+obj.a = 1
+obj.b = 2
+obj.c = 3
+```
+for...of`循环用于遍历可迭代对象（包括数组、Map、Set等）的元素。它不会遍历原型链上的属性，只会遍历对象自身的元素。在遍历数组时，`for...of`循环比`for...in`循环更加常用，因为它只遍历数组的元素，而不会遍历额外的属性。
+
+
+```javascript
+let arr = [1, 2, 3];
+for (let num of arr) {
+  console.log(num);
+}
+```
+上述代码会输出：
+
+
+```
+1
+2
+3
+```
+总结一下，`for...in`循环用于遍历对象的可枚举属性，包括自身属性和原型链上的属性；而`for...of`循环用于遍历可迭代对象的元素，只遍历对象自身的元素。在遍历数组时，推荐使用`for...of`循环。
