@@ -1,0 +1,39 @@
+<!--
+ * @Author liming
+ * @Date 2023/9/20 14:45
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="aop.js"></script>
+</head>
+<body>
+<script>
+    const logger = console.log
+
+    const doSomething = () => {
+        console.log('doSomething')
+    }
+
+    let clickHandler = () => {
+        // n行代码
+        doSomething()
+        //n 行代码
+    }
+
+    clickHandler1 = clickHandler.before(() => {logger('doSomething之前')})
+                               .after(() => {logger('doSomething之后')})
+
+    clickHandler1() // 执行结果和预期一致
+
+    /**
+     * 这里是不是执行了两遍doSomething()?
+     * ——只执行了一次，第一次调用before的时候，func函数指的是原函数，
+     * before函数返回了一个新的函数，继续调用after时，此时的func指的是before里面返回的函数，所以不会执行了两遍doSomething()
+     */
+
+</script>
+</body>
+</html>
