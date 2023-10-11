@@ -24,21 +24,34 @@
         }
 
         function debounce(fn,wait){
+            console.log('debounce函数执行了111')
             let timer = null
             return function(){
                 let args = arguments
-                console.log(args,'args')
+                // console.log(args,'打印args')
                 clearTimeout(timer)
                 // 先去掉之前的定时器
                 timer = setTimeout(()=>{
-                    // 唉，我他娘的apply还是不熟啊！！
+                    console.log('debounce函数执行了222')
                     fn.apply(this,args)
                 },wait)
             }
         }
 
-        let debounceMove = debounce(move,500)
-        div1.onmousemove = debounceMove
+        // let debounceMove = debounce(move,2000)
+        // div1.onmousemove = debounceMove
+
+        // div1.onmousemove = function (){
+        //     // console.log('鼠标移动了')
+        //     debounce(move,2000)
+        // }
+
+        div1.onmousemove =  debounce(move,2000)
+
+        // div1.addEventListener('mousemove',()=>{
+        //     // console.log('mousemove')
+        //     debounce(move,2000)
+        // })
     </script>
 </body>
 

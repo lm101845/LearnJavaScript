@@ -10,12 +10,12 @@
 
 <body>
     <script>
-        var p = new Promise(function(resolve, reject) {
+        let p = new Promise(function(resolve, reject) {
             resolve('我是Promise的值')
         })
         console.log(p)
         p.then(function(res) {
-            console.log(res)
+            console.log(res,'打印res')
         }).then(function(res) {
             //有两种⽅式中断Promise
             // throw('我是中断的原因')

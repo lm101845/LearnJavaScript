@@ -10,7 +10,7 @@
 
 <body>
     <script>
-                /**         
+                /**
                  * 根据现象我们可以分析出链式调⽤的基本形式（极其重要）：
                 1. 只要有then()并且触发了resolve，整个链条就会执⾏到结尾，这个过程中的第⼀个回调函数的参数是resolve
                 传⼊的值
@@ -21,10 +21,10 @@
                 数
                 5. 如果then中传⼊的不是函数或者未传值，Promise链条并不会中断then的链式调⽤，并且在这之前最后⼀次
                 的返回结果，会直接进⼊离它最近的正确的then中的回调函数作为参数
-                    *  
+                    *
                 */
         //通过⼀个超⻓的链式调⽤我们学习⼀下链式调⽤的注意事项
-        var p = new Promise(function(resolve, reject) {
+        let p = new Promise(function(resolve, reject) {
             resolve('我是Promise的值')
         })
         console.log(p)

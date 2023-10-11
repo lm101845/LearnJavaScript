@@ -46,8 +46,10 @@
             let time = 0
             return function () {
                 let now = Date.now()
+                console.log(now,'打印now')
                 let args = arguments
                 if (now - time > wait) {
+                    console.log('函数执行了')
                     fn.apply(this, args)
                     time = now
                 }
@@ -55,7 +57,7 @@
         }
         // 这个版本的时间戳节流当我们的鼠标移出监听区域的时候,即停止运行了.
 
-        let throttleMove = throttle(move, 500)
+        let throttleMove = throttle(move, 1000)
         div1.onmousemove = throttleMove
     </script>
 </body>

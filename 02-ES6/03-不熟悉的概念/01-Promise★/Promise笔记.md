@@ -1,0 +1,13 @@
+# Promise笔记
+
+## Promise.allSettle和Promise.all的区别
+
+Promise.allSettle和Promise.all都是用于处理异步操作的方法，但它们在处理异步操作的结果方面有所不同。
+
+Promise.allSettle是一个新特性，接受一个Promise数组作为输入，并返回一个新的Promise对象。这个新的Promise在所有的输入Promise对象都完成或失败后才会解析，返回的结果是一个数组，数组中的每个元素是一个状态和值对，表示输入的每个Promise对象的状态和值。也就是说，无论输入的Promise对象是否成功，都会返回一个包含所有状态和值的结果数组。
+
+例如，如果我们有一个包含两个Promise对象的数组，其中一个成功解析，另一个失败，那么Promise.allSettle返回的数组将包含两个元素，一个表示成功状态和值，另一个表示失败状态和值。
+
+Promise.all则是另一个新特性，它接受一组可迭代的Promises作为输入，并返回一个新的Promise。如果输入的所有的Promise都成功解析，那么返回的Promise也就成功解析，返回的是所有输入Promise返回的值组成的数组。但如果输入的任何一个Promise失败，那么返回的Promise就会失败，返回的是失败的那个Promise返回的值。
+
+因此，使用Promise.all还是Promise.allSettle，取决于你的需求。如果你需要处理所有异步操作的结果，无论成功还是失败，你就可以使用Promise.allSettle。而如果你需要的是所有异步操作都成功才能继续下一步，那么你应该使用Promise.all。

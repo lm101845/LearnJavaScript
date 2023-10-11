@@ -18,16 +18,16 @@
 
 <body>
     <script>
-        var number = 5;
-        var obj = {
+        let number = 5;
+        let obj = {
             number: 3,
             fn1: (function () {
-                var number;
+                let number;
                 this.number *= 2;
                 number = number * 2;
                 number = 3;
                 return function () {
-                    var num = this.number;
+                    let num = this.number;
                     this.number *= 2;
                     console.log(num);
                     number *= 3;
@@ -35,7 +35,7 @@
                 }
             })()
         }
-        var fn1 = obj.fn1;
+        let fn1 = obj.fn1;
         fn1.call(null);  //10 30
         obj.fn1();  //6 18
         console.log(window.number);  //5
