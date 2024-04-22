@@ -1,0 +1,3 @@
+includes 是 ES7 新增的API，与 indexOf 不同的是 includes 直接返回的是 Boolean 值，indexOf 则 返回的索引值, 数组和字符串都有  includes 方法，具体可以查看 Array.prototype.includes 和 String.prototype.includes
+
+需求：我们来实现一个身份认证方法，通过传入身份Id返回对应的验证结果

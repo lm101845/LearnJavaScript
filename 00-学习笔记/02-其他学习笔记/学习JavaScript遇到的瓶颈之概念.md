@@ -22,6 +22,8 @@ top: true
 
 (注8：现在是2023年9月3日，时间过得好快啊，这些概念对我来说也比较熟悉了。所以说时间是一切的催化剂啊。)
 
+(注9：现在是2024年1月9日......，已经过去这么久了啊，四年时间就这么过去了啊，我快速再看一遍，这回看就从容多了，顺便回忆回忆过往吧)
+
 # 概念1：对象（一个个鲜活的实体）
 
 ## 数据类型
@@ -58,7 +60,7 @@ top: true
 
 **引用类型的（值！！！！！！）就是对象！！！！！**
 
-反过来说，对象就是引用类型的一个个鲜活的实例
+反过来说，**对象就是引用类型的一个个鲜活的实例**
 
 引用类型通常叫做类（class），也就是说，遇到引用值，所处理的就是对象。
 
@@ -159,7 +161,7 @@ JavaScript 字符串 constructor 属性返回 **function String() { [native code
 
 [揭开js之constructor属性的神秘面纱](<https://blog.csdn.net/zengyonglan/article/details/53465505>)
 
-> 在 Javascript 语言中，constructor 属性是专门为 function 而设计的，它存在于每一个 function 的prototype 属性中。这个 constructor 保存了指向 function 的一个引用。
+> 在 Javascript 语言中，constructor 属性是专门为 function 而设计的，它存在于每一个 function 的**prototype 属性**中。这个 constructor 保存了指向 function 的一个引用。
 
 在定义一个函数时：
 
@@ -175,9 +177,9 @@ JavaScript 内部会执行如下几个动作：
 >
 > 2.为 prototype 对象额外添加一个 constructor 属性，并且该属性保存指向函数F 的一个引用
 
-这样当我们把函数 F 作为自定义构造函数来创建对象的时候，对象实例内部会自动保存一个指向其构造函数（这里就是我们的自定义构造函数 F）的 prototype 对象的一个属性proto。
+这样当我们把函数 F 作为**自定义构造函数**来创建对象的时候，对象实例内部会自动保存一个指向其构造函数（这里就是我们的自定义构造函数 F）的 prototype 对象的一个属性proto。
 
-所以我们在每一个对象实例中就可以访问构造函数的 prototype 所有拥有的全部属性和方法，就好像它们是实例自己的一样。当然该实例也有一个 constructor属性了（从 prototype 那里获得的），**每一个对象实例都可以通过 constrcutor 对象访问它的构造函数**，请看下面代码：
+所以我们在每一个对象实例中就可以访问构造函数的 prototype 所有拥有的全部属性和方法，就好像它们是实例自己的一样。当然**该实例**也有一个 constructor属性了（**从 prototype 那里获得的**），**每一个对象实例都可以通过 constrcutor 对象访问它的构造函数**，请看下面代码：
 
 ~~~javascript
 var f = new F();
@@ -204,14 +206,14 @@ if(f instanceof F) {
 }
 ~~~
 
-**原型链继承**，由于 constructor 存在于 prototype 对象上，因此我们可以结合
-constructor 沿着原型链找到最原始的构造函数，如下面代码：
+**原型链继承**，由于 constructor 存在于 **prototype 对象**上，因此我们可以结合constructor **沿着原型链找到最原始的构造函数**，如下面代码：
 
 ~~~javascript
 function Base() {}
 
 // Sub1 inherited from Base through prototype chain
 function Sub1(){}
+
 Sub1.prototype = new Base();
 Sub1.prototype.constructor = Sub1;
 
@@ -239,7 +241,7 @@ function F() {}
     F.prototype = {
     _name: 'Eric',
     getName: function() {
-    return this._name;
+    	return this._name;
     }
 };
 
@@ -248,7 +250,7 @@ var f = new F();
 alert(f.constructor === F); // output false
 ~~~
 
-怎么回事？F 不是实例对象 f 的构造函数了吗？当然是！只不过构造函数 F 的原型被开发者重写了，这种方式将原有的 prototype 对象用一个对象的字面量{}来代替。而新建的对象{}只是 Object 的一个实例，系统（或者说浏览器）在解析的时候并不会在{}上自动添加一个 constructor 属性，因为这是 function 创建时的专属操作，仅当你声明函数的时候解析器才会做此动作。然而你会发现 constructor 并不是不存在的，下面代码可以
+怎么回事？F 不是实例对象 f 的构造函数了吗？当然是！只不过构造函数 F 的原型被开发者重写了，这种方式将原有的 prototype 对象用一个对象的字面量{}来代替。而新建的对象{}只是 Object 的一个实例，系统（或者说浏览器）在解析的时候并不会在{}上自动添加一个 constructor 属性，因为**这是 function 创建时的专属操作**，仅当你声明函数的时候解析器才会做此动作。然而你会发现 constructor 并不是不存在的，下面代码可以
 测试它的存在性：
 
 ~~~javascript
@@ -316,7 +318,7 @@ alert(Function.constructor === Function); // output true
 
 #### 定义和用法
 
-prototype 属性使您有能力向对象添加属性和方法。
+prototype 属性使您有能力**向对象添加属性和方法**。
 
 #### 语法
 
@@ -581,7 +583,7 @@ function Person(name,height){
 
     console.log(boy.name);    //'keith'
     console.log(girl.name);    //'rascal'
-    console.log(boy.hobby===girl.hobby);  //false 无法理解啊
+    console.log(boy.hobby===girl.hobby);  //false 无法理解啊——可以理解了
 ~~~
 
 上面代码中，一个构造函数Person生成了两个对象实例boy和girl，并且有两个属性和一个方法。但是，它们的hobby方法是不一样的。也就是说，每当你使用new来调用构造函数放回一个对象实例的时候，都会创建一个hobby方法。这既没有必要，又浪费资源，因为所有hobby方法都是同样的行为，完全可以被两个对象实例共享。
@@ -2965,7 +2967,7 @@ process.nextTick(function foo() {
 
 ## JS中对象可以用for of进行循环吗
 
-在JavaScript中，`for...of`循环是用于遍历可迭代对象（iterable objects）的，比如数组（Array）、字符串（String）、Map、Set等。然而，普通的对象（Object）并不是可迭代的，所以不能直接使用`for...of`循环来遍历对象的属性。
+在JavaScript中，`for...of`循环是用于遍历可迭代对象（iterable objects）的，比如数组（Array）、字符串（String）、Map、Set等。然而，**普通的对象**（Object）并不是可迭代的，所以不能直接使用`for...of`循环来遍历对象的属性。
 
 如果你想遍历对象的属性，可以使用`for...in`循环或者`Object.keys()`方法配合`for...of`循环。
 
