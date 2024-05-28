@@ -18,6 +18,8 @@ top: 887
 
 (注6：现在是2020年9月12日，终于把这套视频给看完了，算了一下居然花了21天，整整3周。)
 
+(注7：现在是2024年5月28日，偶尔翻到，再看一遍，哈哈哈。逝者如斯夫，不舍昼夜。快4年了啊。。。。。。)
+
 # JavaScript面向对象
 
 ## 目标
@@ -282,8 +284,6 @@ const cat2 = new Cat('咪咪',2)
 const cat3 = new Cat('毛毛', 3)
 ~~~
 
-
-
 ### 类添加方法
 
 **语法**：
@@ -449,7 +449,7 @@ super关键字用于**访问和调用**对象父类上的函数。可以调用�
 **语法**：
 
 ~~~javascript
-class Person{				//父类
+class Person{//父类
 		constructor(surname){
 				this.surname = surname;
     }
@@ -599,7 +599,7 @@ class Student extends Person{  //子类继承父类
         // 子类继承父类加法方法 同时 扩展减法方法
         class Son extends Father {
             constructor(x, y) {
-      			//利用super调用父类的构造函数(不然子类的this无法指向父类的constructor,
+      		//利用super调用父类的构造函数(不然子类的this无法指向父类的constructor,
             //使用不了父类的sum方法)
             //并且super必须在子类this之前调用
                 super(x, y);
@@ -1314,7 +1314,6 @@ Javascript的构造函数中可以添加一些成员，可以在**构造函数�
 ~~~javascript
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1480,7 +1479,7 @@ JavaScript规定，**每一个构造函数都有一个prototype属性(这个属�
 
 [JavaScript中constructor属性](https://segmentfault.com/a/1190000013245739)
 
-对象原型（`__proto__`）和构造函数（prototype）**原型对象**里面**都有**一个属性**constructor属性**，**constructor我们称为构造函数**，因为它**指回构造函数本身**。
+对象原型（`__proto__`）和构造函数**原型对象**（prototype）里面**都有**一个属性**constructor属性**，**constructor我们称为构造函数**，因为它**指回构造函数本身**。
 
 constructor主要用于**记录该对象引用于哪个构造函数**，**它可以让原型对象重新指向原来的构造函数**。
 
@@ -1883,7 +1882,7 @@ fun.call(thisArg, arg1, arg2,...)
         // 如果利用对象的形式修改了原型对象,别忘了利用constructor 指回原来的构造函数
         Son.prototype.constructor = Son;
         // 这个是子构造函数专门的方法(父构造函数没有)
-				//但是这么写完后父亲也会有exam这个方法了
+		//但是这么写完后父亲也会有exam这个方法了
         Son.prototype.exam = function() {
             console.log('孩子要考试');
         }
