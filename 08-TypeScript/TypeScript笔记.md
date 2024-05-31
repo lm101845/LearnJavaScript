@@ -10,6 +10,143 @@
 
 ## 知识点
 
+### `never`和`unknown`类型
+
+为了保持与集合论的对应关系，以及类型运算的完整性，TypeScript 还引入了“空类型”的概念，即该类型为空，不包含任何值。
+
+由于不存在任何属于“空类型”的值，所以该类型被称为`never`，即不可能有这样的值。
+
+~~~ts
+let x: never;
+~~~
+
+上面示例中，变量`x`的类型是`never`，就不可能赋给它任何值，否则都会报错。
+
+`never`类型的使用场景，主要是在一些类型运算之中，保证类型运算的完整性，详见后面章节。另外，不可能返回值的函数，返回值的类型就可以写成`never`，详见《函数》一章。
+
+如果一个变量可能有多种类型（即联合类型），通常需要使用分支处理每一种类型。这时，处理所有可能的类型之后，剩余的情况就属于`never`类型。
+
+~~~ts
+function fn(x: string | number) {
+  if (typeof x === "string") {
+    // ...
+  } else if (typeof x === "number") {
+    // ...
+  } else {
+    x; // never 类型
+  }
+}
+~~~
+
+上面示例中，参数变量`x`可能是字符串，也可能是数值，判断了这两种情况后，剩下的最后那个`else`分支里面，`x`就是`never`类型了。
+
+`never`类型的一个重要特点是，可以赋值给任意其他类型。
+
+~~~ts
+function f(): never {
+  throw new Error("Error");
+}
+
+let v1: number = f(); // 不报错
+let v2: string = f(); // 不报错
+let v3: boolean = f(); // 不报错
+~~~
+
+上面示例中，函数`f()`会抛错，所以返回值类型可以写成`never`，即不可能返回任何值。各种其他类型的变量都可以赋值为`f()`的运行结果（`never`类型）。
+
+为什么`never`类型可以赋值给任意其他类型呢？这也跟集合论有关，空集是任何集合的子集。TypeScript 就相应规定，任何类型都包含了`never`类型。因此，`never`类型是任何其他类型所共有的，TypeScript 把这种情况称为“底层类型”（bottom type）。
+
+总之，TypeScript 有两个“顶层类型”（`any`和`unknown`），但是“底层类型”只有`never`唯一一个。
+
+#### 疑问1：如何理解never类型可以分配给其他任何类型
+
+在 TypeScript 中，`never` 类型表示的是那些永不存在的值的类型。例如，`never` 是那些总是会抛出异常或者根本就不会有返回值的函数表达式或箭头函数表达式的返回值类型。
+
+当你尝试将一个 `never` 类型的值赋值给其他类型的变量时，TypeScript 不会报错，因为从逻辑上讲，你实际上无法赋值一个 `never` 类型的值。如果你能够赋值，那么这个值的类型就不是 `never`。
+
+这是 TypeScript 类型系统的一部分，用于处理永不可能发生的情况。在实际的编程中，你可能很少直接使用 `never` 类型，但它在某些特殊情况下可能会出现。
+
+以下是一个 `never` 类型的例子：
+
+```typescript
+function error(message: string): never {
+    throw new Error(message);
+}
+
+let x: number;
+
+// No error, even though "error" function has "never" return type
+x = error("Something went wrong");
+```
+
+在这个例子中，`error` 函数的返回类型是 `never`，这表示这个函数永远不会有返回值。然后我们尝试将 `error` 函数的返回值赋值给一个 `number` 类型的变量 `x`，TypeScript 不会报错，因为从逻辑上讲，`error` 函数永远不会返回一个值，所以这个赋值操作实际上永远不会发生。
+
+#### 疑问2：如何理解底层和顶层
+
+> TypeScript 有两个“顶层类型”（any和unknown），但是“底层类型”只有never唯一一个，如何理解顶层和底层
+
+在 TypeScript 中，"顶层类型" 和 "底层类型" 是用来描述类型系统的层次结构的术语。
+
+"顶层类型"（也被称为 "最大类型"）是可以赋值给任何其他类型的类型。在 TypeScript 中，`any` 和 `unknown` 是顶层类型。这意味着你可以将任何类型的值赋值给 `any` 或 `unknown` 类型的变量。
+
+例如：
+
+```typescript
+let a: any = 123; // OK
+a = 'hello'; // OK
+a = true; // OK
+
+let u: unknown = 123; // OK
+u = 'hello'; // OK
+u = true; // OK
+```
+
+"底层类型"（也被称为 "最小类型"）是可以被赋值给任何其他类型的类型。在 TypeScript 中，`never` 是底层类型。这意味着你可以将 `never` 类型的值赋值给任何类型的变量，但是你不能将其他类型的值赋值给 `never` 类型的变量。
+
+例如：
+
+```typescript
+let n: never;
+
+let b: boolean = n; // OK
+let s: string = n; // OK
+let num: number = n; // OK
+```
+
+这些类型的存在，使得 TypeScript 的类型系统能够更好地处理各种复杂的类型场景，提供了更强大的类型安全性。
+
+### 疑问3
+
+在 TypeScript 中，"顶层类型"和"底层类型"是描述类型系统层次结构的术语。
+
+"顶层类型"是指可以赋值给任何其他类型的类型。在 TypeScript 中，`any` 和 `unknown` 是顶层类型。你可以把它们想象成一个大**容器(即左边的变量，它是容器，用来装东西)**，可以接受任何类型的值。
+
+例如，你可以把数字、字符串、布尔值等任何类型的值赋值给 `any` 或 `unknown` 类型的变量：
+
+```typescript
+let a: any = 123; // OK
+a = 'hello'; // OK
+a = true; // OK
+
+let u: unknown = 123; // OK
+u = 'hello'; // OK
+u = true; // OK
+```
+
+"底层类型"是指可以被赋值给任何其他类型的类型。在 TypeScript 中，`never` 是底层类型。你可以把它想象成一个小容器，它不能接受任何类型的值，但它可以被赋值给任何类型的变量。
+
+例如，你可以把 `never` 类型的值赋值给数字、字符串、布尔值等任何类型的变量，但你不能把其他类型的值赋值给 `never` 类型的变量：
+
+```typescript
+let n: never;
+
+let b: boolean = n; // OK
+let s: string = n; // OK
+let num: number = n; // OK
+```
+
+简单来说，**"顶层类型"就像是一个无底洞，可以接受任何类型的值；"底层类型"就像是一个空洞，不能接受任何类型的值，但它可以适应任何类型的容器**。
+
 ### 类型断言
 
 TypeScript 只允许类型断言转换为更具体或不太具体的类型版本。此规则可防止“不可能”的强制，例如：
@@ -48,6 +185,142 @@ function compare(a: string, b: string): -1 | 0 | 1 {
 ### as const 断言
 
 [as const 断言-阮一峰](https://typescript.p6p.net/typescript-tutorial/assert.html#as-const-%E6%96%AD%E8%A8%80)
+
+### in操作符
+
+#### in 运算符
+
+JavaScript 语言中，`in`运算符用来确定对象是否包含某个属性名。
+
+javascript
+
+```
+const obj = { a: 123 };
+
+if ("a" in obj) console.log("found a");
+```
+
+上面示例中，`in`运算符用来判断对象`obj`是否包含属性`a`。
+
+`in`运算符的左侧是一个字符串，表示属性名，右侧是一个对象。它的返回值是一个布尔值。
+
+TypeScript 语言的类型运算中，`in`运算符有不同的用法，用来取出（遍历）联合类型的每一个成员类型。
+
+typescript
+
+```ts
+type U = "a" | "b" | "c";
+
+type Foo = {
+  [Prop in U]: number;
+};
+// 等同于
+type Foo = {
+  a: number;
+  b: number;
+  c: number;
+};
+```
+
+上面示例中，`[Prop in U]`表示依次取出联合类型`U`的每一个成员。
+
+上一小节的例子也提到，`[Prop in keyof Obj]`表示取出对象`Obj`的每一个键名。
+
+### 类型谓词( is关键字 )
+
+TypeScript 中的 `is` 关键字，它被称为类型谓词，用来判断一个变量属于某个接口或类型。
+
+`is`运算符用来描述返回值属于`true`还是`false`。
+
+```ts
+type Fish = {
+ name: string
+ swim: () => void
+}
+ 
+type Bird = {
+ name: string
+ fly: () => void
+}
+ 
+function isFish(pet: Fish | Bird): pet is Fish {
+  return (pet as Fish).swim !== undefined;
+}
+```
+
+这段代码定义了两种类型：`Fish` 和 `Bird`，并定义了一个函数 `isFish`，用于判断一个对象是否为 `Fish` 类型。
+
+`Fish` 类型有两个属性：`name`（一个字符串）和 `swim`（一个没有参数和返回值的函数）。
+
+`Bird` 类型也有两个属性：`name`（一个字符串）和 `fly`（一个没有参数和返回值的函数）。
+
+`isFish` 函数接受一个参数 `pet`，这个参数可以是 `Fish` 类型或 `Bird` 类型。函数返回一个布尔值，表示 `pet` 是否为 `Fish` 类型。
+
+在函数体中，`(pet as Fish).swim !== undefined` 是一个类型断言，它尝试将 `pet` 当作 `Fish` 类型来处理，并检查 `swim` 属性是否存在。如果 `swim` 属性存在，那么 `pet` 就是 `Fish` 类型，函数返回 `true`；否则，函数返回 `false`。(如果不存在，就返回false)
+
+这种函数通常用于类型保护，在 TypeScript 中，类型保护是一种表达式，它在编译时期就能通过类型检查。如果这种表达式在运行时期为 `true`，那么在这个表达式的作用域中，变量的类型就是该类型保护所指定的类型。
+
+`is`运算符总是用于描述函数的返回值类型，写法采用`parameterName is Type`的形式，即左侧为当前函数的参数名，右侧为某一种类型。它返回一个布尔值，表示左侧参数是否属于右侧的类型。
+
+```ts
+type A = { a: string };
+type B = { b: string };
+
+function isTypeA(x: A | B): x is A {
+  if ("a" in x) return true;
+  return false;
+}
+```
+
+上面示例中，返回值类型`x is A`可以准确描述函数体内部的运算逻辑。
+
+#### 有关问题
+
+> `pet is Fish`是什么意思，它是boolean类型吗
+
+`pet is Fish` 是 TypeScript 中的类型谓词。类型谓词是一种特殊的返回类型，用于在编译时期就能通过类型检查的表达式。在这个例子中，`pet is Fish` 表示的是 "参数 `pet` 是 `Fish` 类型"。
+
+类型谓词的格式为 `参数 is 类型`，在这个例子中，参数是 `pet`，类型是 `Fish`。如果 `isFish` 函数返回 `true`，那么 TypeScript 编译器就会知道在这个函数返回 `true` 的代码块中，`pet` 的类型是 `Fish`。
+
+虽然类型谓词在运行时的行为类似于 `boolean` 类型（因为它实际上是返回 `true` 或 `false`），但在编译时，它提供了额外的类型信息，这是普通的 `boolean` 类型无法提供的。因此，`pet is Fish` 不应被视为 `boolean` 类型，而应被视为一种特殊的返回类型。
+
+#### 代码含义
+
+~~~ts
+function getSmallPet(): Fish | Bird {
+    
+ let fish: Fish = {
+  name: 'gold fish',
+  swim: () => {
+ }
+}
+ 
+ let bird: Bird = {
+  name: 'sparrow',
+  fly: () => {
+ }
+}
+ return true ? bird : fish
+ //这里true只是随便写，实际根据情况进行判断
+}
+// 这里 pet 的 swim 和 fly 都可以访问了
+let pet = getSmallPet()
+if (isFish(pet)) {
+ pet.swim()
+} else {
+ pet.fly()
+}
+~~~
+
+这段代码定义了一个函数 `getSmallPet`，该函数返回一个 `Fish` 类型或 `Bird` 类型的对象。在函数体中，首先定义了一个 `Fish` 类型的对象 `fish` 和一个 `Bird` 类型的对象 `bird`。然后，函数返回 `bird` 或 `fish`，这取决于三元运算符 `true ? bird : fish` 的结果。
+
+在这个例子中，因为条件始终为 `true`，所以函数始终返回 `bird`。这是一个简化的示例，实际的代码中可能会有更复杂的逻辑来决定返回 `bird` 还是 `fish`。
+
+然后，代码创建了一个 `pet` 对象，该对象是 `getSmallPet` 函数的返回值。因此，`pet` 是一个 `Bird` 类型的对象。
+
+接下来，代码使用 `isFish` 函数来检查 `pet` 是否为 `Fish` 类型。如果 `pet` 是 `Fish` 类型，那么就调用 `pet` 的 `swim` 方法；否则，就调用 `pet` 的 `fly` 方法。在这个例子中，因为 `pet` 是 `Bird` 类型，所以会调用 `pet` 的 `fly` 方法。
+
+总的来说，这段代码展示了如何使用 TypeScript 的类型保护和类型断言来处理联合类型。
 
 ## 常见问题
 
