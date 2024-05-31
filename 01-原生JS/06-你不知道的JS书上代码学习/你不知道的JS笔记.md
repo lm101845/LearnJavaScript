@@ -1,6 +1,8 @@
 # 你不知道的JS笔记
 
-## 问题1
+# 问题
+
+### 问题1
 
 > 为什么三个都是2
 
@@ -41,7 +43,7 @@ bar.call( window ); // 2
 
 所以，三个调用的输出都是 2，因为 `foo` 函数内部的 `this` 被硬编码绑定到了 `obj` 对象上，而这个对象的 `a` 属性值为 2。
 
-## 问题2
+### 问题2
 
 ~~~js
 var curried = [].slice.call( arguments, 1 );含义
@@ -68,3 +70,32 @@ function exampleFunction() {
 ```
 
 在这个例子中，`curried` 将是一个包含从第二个参数开始到最后一个参数的所有参数的数组。注意，在现代JavaScript（ES6+）中，你也可以使用扩展运算符（`...`）或 `Array.from` 方法来达到类似的效果。
+
+### 问题3
+
+> 下面代码含义
+
+~~~js
+function foo() {
+    var arr = Array.prototype.slice.call( arguments );
+    arr.push( "bam" );
+    console.log( arr );
+}
+~~~
+
+这段JavaScript代码定义了一个名为`foo`的函数。这个函数接收任意数量的参数，并将这些参数转换为一个数组。然后，它在数组的末尾添加一个字符串`"bam"`，并将最终的数组打印到控制台。
+
+下面是这段代码的详细解释：
+
+1. `function foo() {...}`：定义了一个名为`foo`的函数。
+
+2. `var arr = Array.prototype.slice.call( arguments );`：`arguments`是一个特殊的对象，它包含了传递给函数的所有参数。`Array.prototype.slice.call( arguments )`是一种常见的技巧，用于将`arguments`对象转换为一个真正的数组。这样做的好处是，你可以在这个数组上使用诸如`push`、`pop`、`slice`等数组方法。
+
+3. `arr.push( "bam" );`：在数组的末尾添加一个新元素`"bam"`。
+
+4. `console.log( arr );`：将数组打印到控制台。
+
+所以，如果你调用`foo("bar", "baz")`，这个函数会打印`["bar", "baz", "bam"]`到控制台。
+
+
+
